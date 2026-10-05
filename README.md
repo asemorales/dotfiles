@@ -1,4 +1,4 @@
-# linux-config-backups
+# dotfiles
 
 I dump my dotfiles here.
 
@@ -24,8 +24,8 @@ I dump my dotfiles here.
 ## Install
 
 ```bash
-git clone <this repo> ~/code/linux-config-backups
-~/code/linux-config-backups/INSTALL.sh
+git clone <this repo> ~/code/dotfiles
+~/code/dotfiles/INSTALL.sh
 ```
 
 To fix warnings, compare the two files with `diff`. Keep the version you want in the repo, then delete the home copy and run the script again.
