@@ -1,6 +1,8 @@
 # dotfiles
 
-I dump my dotfiles here.
+> "The identity, which we ascribe to the mind of man, is only a fictitious one. [...] man is nothing but a bundle or collection of different dotfiles."
+>
+> David Hume, *A Treatise of Human Nature* (1739)
 
 ## Setup
 
