@@ -1,0 +1,21 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+k ctrl+e",
+        "command": "editor.action.insertCursorAtEndOfEachLineSelected",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+alt+i",
+        "command": "-editor.action.insertCursorAtEndOfEachLineSelected",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+space",
+        "command": "workbench.action.focusPanel"
+    },
+    {
+        "key": "shift+meta+b",
+        "command": "editor.action.selectToBracket"
+    }
+]

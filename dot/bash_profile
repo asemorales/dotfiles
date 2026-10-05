@@ -1,0 +1,4 @@
+alias spin='[ -f node_modules/.bin/spin ] && bash node_modules/.bin/spin || bash vendor/bin/spin'
+
+
+. "$HOME/.local/bin/env"
