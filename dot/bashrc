@@ -37,7 +37,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+    xterm-color|*-256color|xterm-kitty) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -131,3 +131,6 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
 fi
 
 . "$HOME/.local/bin/env"
+# >>> Miyo CLI >>>
+export PATH="/home/ase/.miyo/bin:$PATH"
+# <<< Miyo CLI <<<

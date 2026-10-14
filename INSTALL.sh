@@ -41,6 +41,14 @@ link_claude_path() {
   do_link "$REPO/claude/$1" "$HOME/.claude/$1"
 }
 
+link_theme_path() {
+  do_link "$REPO/themes/$1" "$HOME/.themes/$1"
+}
+
+link_local_path() {
+  do_link "$REPO/local/$1" "$HOME/.local/$1"
+}
+
 link_dot_path bashrc
 link_dot_path bash_profile
 link_dot_path bash_logout
@@ -50,17 +58,32 @@ link_dot_path gitconfig
 link_dot_path dmrc
 link_dot_path ssh/config
 
+link_config_path autostart/gallery-caption.desktop
 link_config_path fish/conf.d/uv.env.fish
+link_config_path gallery/wall.yml
 link_config_path git/ignore
 link_config_path gtk-3.0/bookmarks
+link_config_path gtk-3.0/gtk.css
+link_config_path kitty/kitty.conf
+link_config_path kitty/gallery-navy.conf
+link_config_path kitty/gallery-light.conf
 link_config_path mimeapps.list
 link_config_path neofetch/config.conf
+link_config_path nvim/init.lua
+link_config_path nvim/colors/gallery.lua
 link_config_path systemd/user/appimaged.service
 link_config_path user-dirs.dirs
 link_config_path VSCodium/User/keybindings.json
 link_config_path VSCodium/User/settings.json
 link_config_path xdg-terminals.list
 link_config_path xfce4/terminal/terminalrc
+
+link_theme_path Gallery
+link_theme_path Gallery-Navy
+
+link_local_path bin/gallery-mode
+link_local_path bin/gallery-caption
+link_local_path share/icons/gallery-icons-build.py
 
 link_claude_path settings.json
 link_claude_path skills/rewrite-natural

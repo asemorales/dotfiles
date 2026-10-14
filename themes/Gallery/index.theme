@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Gallery
+Comment=Quiet gallery theme matching asemorales.github.io
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Gallery
+MetacityTheme=Gallery
+IconTheme=Gallery
+CursorTheme=Adwaita
+ButtonLayout=close,maximize,minimize:

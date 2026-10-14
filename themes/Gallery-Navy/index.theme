@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Gallery-Navy
+Comment=Quiet gallery theme matching asemorales.github.io
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Gallery-Navy
+MetacityTheme=Gallery-Navy
+IconTheme=Gallery-Navy
+CursorTheme=Adwaita
+ButtonLayout=close,maximize,minimize:

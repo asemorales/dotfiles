@@ -2,3 +2,6 @@ alias spin='[ -f node_modules/.bin/spin ] && bash node_modules/.bin/spin || bash
 
 
 . "$HOME/.local/bin/env"
+# >>> Miyo CLI >>>
+export PATH="/home/ase/.miyo/bin:$PATH"
+# <<< Miyo CLI <<<
