@@ -58,9 +58,12 @@ link_dot_path gitconfig
 link_dot_path dmrc
 link_dot_path ssh/config
 
+link_config_path autostart/gallery-bar.desktop
 link_config_path autostart/gallery-caption.desktop
 link_config_path fish/conf.d/uv.env.fish
 link_config_path gallery/wall.yml
+link_config_path btop/themes
+link_config_path eww
 link_config_path git/ignore
 link_config_path gtk-3.0/bookmarks
 link_config_path gtk-3.0/gtk.css
@@ -76,14 +79,23 @@ link_config_path user-dirs.dirs
 link_config_path VSCodium/User/keybindings.json
 link_config_path VSCodium/User/settings.json
 link_config_path xdg-terminals.list
+link_config_path xfce4/helpers.rc
 link_config_path xfce4/terminal/terminalrc
+link_config_path yazi/yazi.toml
+link_config_path yazi/keymap.toml
+link_config_path yazi/theme.toml
+link_config_path yazi/flavors/gallery-navy.yazi
+link_config_path yazi/flavors/gallery-light.yazi
 
 link_theme_path Gallery
 link_theme_path Gallery-Navy
 
 link_local_path bin/gallery-mode
 link_local_path bin/gallery-caption
+link_local_path bin/gallery-bar
 link_local_path share/icons/gallery-icons-build.py
+link_local_path share/applications/yazi.desktop
+link_local_path share/xfce4/helpers/yazi.desktop
 
 link_claude_path settings.json
 link_claude_path skills/rewrite-natural

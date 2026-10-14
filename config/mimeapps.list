@@ -1,4 +1,5 @@
 [Added Associations]
+inode/directory=yazi.desktop;thunar.desktop;
 image/svg+xml=org.inkscape.Inkscape.desktop;gimp.desktop;brave-browser.desktop;codium.desktop;org.xfce.ristretto.desktop;
 text/plain=codium.desktop;libreoffice-writer.desktop;gimp.desktop;okularApplication_txt.desktop;
 image/jpeg=org.xfce.ristretto.desktop;
@@ -30,6 +31,7 @@ text/x-python=codium.desktop;
 application/x-godot-project=codium.desktop;
 
 [Default Applications]
+inode/directory=yazi.desktop
 image/jpeg=org.xfce.ristretto.desktop
 application/x-ms-dos-executable=userapp-ILSpy-G5G3V2.desktop
 application/json=codium.desktop

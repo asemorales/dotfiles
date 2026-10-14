@@ -131,6 +131,17 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
 fi
 
 . "$HOME/.local/bin/env"
+
+# y: open Yazi, and on quit cd to wherever you left it.
+y() {
+  local tmp cwd
+  tmp="$(mktemp -t yazi-cwd.XXXXXX)"
+  yazi "$@" --cwd-file="$tmp"
+  cwd="$(<"$tmp")"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+  rm -f -- "$tmp"
+}
+command -v zoxide >/dev/null && eval "$(zoxide init bash)"
 # >>> Miyo CLI >>>
 export PATH="/home/ase/.miyo/bin:$PATH"
 # <<< Miyo CLI <<<

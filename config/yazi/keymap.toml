@@ -1,0 +1,12 @@
+# Additions to Yazi's default keys. Press ~ inside Yazi for the full list.
+# Tabs: t opens one, 1-9 jump. In Kitty, alt+1-9 jump between Kitty's own tabs.
+
+#:schema https://yazi-rs.github.io/schemas/keymap.json
+
+[mgr]
+prepend_keymap = [
+	{ on = [ "g", "r" ], run = "cd ~/code",            desc = "Go to ~/code" },
+	{ on = [ "g", "." ], run = "cd ~/code/dotfiles",   desc = "Go to the dotfiles" },
+	{ on = [ "g", "p" ], run = "cd ~/Pictures",        desc = "Go to ~/Pictures" },
+	{ on = [ "g", "w" ], run = "cd ~/Pictures/gallery", desc = "Go to the paintings" },
+]

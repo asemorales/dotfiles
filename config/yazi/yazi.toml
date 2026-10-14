@@ -1,0 +1,23 @@
+# Yazi, the keyboard file explorer. Run it as `y` (dot/bashrc) so the shell
+# follows you out. Colours: theme.toml picks a flavor from Kitty's background.
+
+#:schema https://yazi-rs.github.io/schemas/yazi.json
+
+[mgr]
+ratio          = [ 1, 3, 4 ]   # a wide preview, so paintings hang large
+sort_by        = "natural"
+sort_dir_first = true
+linemode       = "none"
+show_hidden    = false
+scrolloff      = 5
+
+[preview]
+max_width     = 1600           # the 4K screen at 2x
+max_height    = 2400
+image_filter  = "lanczos3"
+image_quality = 90
+
+[opener]
+edit = [
+	{ run = "${EDITOR:-nvim} %s", desc = "nvim", for = "unix", block = true },
+]

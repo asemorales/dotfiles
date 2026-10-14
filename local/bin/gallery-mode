@@ -8,8 +8,8 @@
 #   gallery-mode data     reread the paintings and recut them for the screen
 #
 # Changes the GTK theme, xfwm4 theme, icons, panel (through the GTK theme),
-# notifications, terminal colours (Xfce Terminal and Kitty), wallpapers and
-# the caption together.
+# notifications, terminal colours (Xfce Terminal and Kitty), wallpapers,
+# the caption and the eww bar together. Yazi follows Kitty on its next start.
 # Which paintings hang where: ~/.config/gallery/wall.yml
 
 set -euo pipefail
@@ -212,6 +212,7 @@ apply() {
   printf '%s\n' "${set[@]}" > "$STATE_DIR/set"
 
   command -v gallery-caption >/dev/null && gallery-caption restart >/dev/null 2>&1 || true
+  command -v gallery-bar >/dev/null && gallery-bar room >/dev/null 2>&1 || true
   echo "Gallery mode: $mode"
 }
 
