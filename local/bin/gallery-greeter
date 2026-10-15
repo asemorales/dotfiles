@@ -24,8 +24,10 @@ DEFAULT_MODE=navy
 mode=$(cat "$STATE_DIR/mode" 2>/dev/null || echo "$DEFAULT_MODE")
 if [ "$mode" = navy ]; then theme=Gallery-Navy; else theme=Gallery; fi
 
-# The painting on the first workspace, so the hand-off to the desktop is seamless.
-key=$(head -n 1 "$DATA_DIR/room-$mode")
+# wall.yml's `login` painting, the same on the boot menu and the login screen,
+# or else the painting on the room's first workspace.
+key=$(head -n 1 "$DATA_DIR/login" 2>/dev/null || true)
+[ -n "$key" ] || key=$(head -n 1 "$DATA_DIR/room-$mode")
 painting=$(awk -F'\t' -v k="$key" '$1 == k { print $2 }' "$TSV")
 [ -s "$painting" ] || { echo "no painting for $key; run gallery-mode data" >&2; exit 1; }
 

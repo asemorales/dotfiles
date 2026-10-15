@@ -109,6 +109,11 @@
   --folder-color-folder-filter: var(--layout-color-2) !important;
   --folder-color-folder-rss: var(--layout-color-2) !important;
 
+  /* Every unread message gets the four-pointed star, not just new arrivals.
+     Thunderbird gives the star to "new" mail only; once that flag clears
+     (opening the folder, restarting) unread mail falls back to a dot. */
+  --read-status-icon: var(--read-status-new) !important;
+
   /* No grey strip behind the tabs. */
   --tabs-toolbar-background-color: transparent !important;
   --tabs-toolbar-box-shadow: none !important;
@@ -162,5 +167,175 @@
   & .card-layout > td > .card-container {
     padding-block: 6px !important;
     box-shadow: none !important;
+  }
+}
+
+/* ---- Search results (Gloda facet view) ---------------------------------- */
+
+/* The search tab is its own chrome page with hardcoded blues, lightgrey
+   borders and monospace excerpts. Restyle it like the message list: serif
+   small-caps headings, Inter text, hairline rules and soft rounded hovers. */
+@-moz-document url("chrome://messenger/content/glodaFacetView.xhtml") {
+  #body {
+    --linkColor: var(--layout-color-1) !important;
+    --barHlColor: var(--layout-color-2) !important;
+    --barColor: var(--color-primary-soft) !important;
+    --dateHLColor: var(--layout-color-2) !important;
+    --gallery-rule: light-dark(var(--color-gray-30), var(--color-gray-60));
+    --gallery-hover: var(--color-primary-soft);
+    /* The inbox's card view: cards on the page colour, set in a darker well. */
+    --gallery-well: light-dark(var(--color-gray-05), var(--color-black));
+    --gallery-card: var(--layout-background-0);
+    --gallery-card-hover: light-dark(
+      color-mix(in srgb, var(--selected-item-color) 5%, var(--layout-background-0)),
+      color-mix(in srgb, var(--selected-item-color) 10%, var(--layout-background-0))
+    );
+    font-family: "Inter", sans-serif !important;
+  }
+
+  .facets-sidebar {
+    padding: 1.5em 1em 1em 1.5em !important;
+  }
+  #gloda-facet-view,
+  #main-column {
+    background-color: var(--gallery-well) !important;
+  }
+  #main-column {
+    padding-inline: 2.5em 1em !important;
+  }
+
+  /* Section titles: Filters, People, Folder, Account. */
+  .facets-sidebar :is(h1, h2, h3),
+  .facet-included-header,
+  .facet-excluded-header,
+  .facet-remaindered-header {
+    font-family: "Source Serif 4", serif !important;
+    font-weight: 600 !important;
+    font-feature-settings: "smcp", "c2sc" !important;
+    letter-spacing: 0.04em !important;
+    color: var(--layout-color-2) !important;
+  }
+
+  /* "Results for: globe" as a page title. */
+  .explanation-fulltext-label,
+  .explanation-query-label {
+    font-family: "Source Serif 4", serif !important;
+    font-weight: 600 !important;
+    font-feature-settings: "smcp" !important;
+    letter-spacing: 0.04em !important;
+    font-size: 1.25em !important;
+  }
+  .explanation-fulltext-term {
+    font-family: "Source Serif 4", serif !important;
+    font-size: 1.25em !important;
+    font-style: italic !important;
+  }
+
+  /* Facet rows: no ruled table, just names and quiet counts. */
+  .barry,
+  .bar {
+    border-color: transparent !important;
+  }
+  .bar {
+    border-radius: 8px !important;
+  }
+  .bar:is(:hover, :focus),
+  .bar[selected="true"],
+  .bar:is(:hover, :focus, [selected="true"]) > :is(.bar-link, .bar-count),
+  facet-boolean:not([disabled]):is(:hover, [checked="true"]) > .facet-checkbox-bubble,
+  facet-boolean-filtered:not([disabled]):is(:hover, [checked="true"]) > .facet-checkbox-bubble {
+    background-color: var(--gallery-hover) !important;
+    color: var(--layout-color-0) !important;
+  }
+  .bar-count,
+  .message-meta,
+  .facet-checkbox-count {
+    color: var(--layout-color-3) !important;
+    font-variant-numeric: tabular-nums !important;
+  }
+
+  /* "Show results as list": a quiet text link. */
+  .results-message-showall-button {
+    color: var(--layout-color-2) !important;
+    text-decoration: none !important;
+    border-radius: 999px !important;
+    padding-inline-start: 10px !important;
+  }
+  .results-message-showall-button:is(:hover, :focus) {
+    background-color: var(--gallery-hover) !important;
+    color: var(--layout-color-0) !important;
+  }
+  .results-message-header {
+    border-bottom: 1px solid var(--gallery-rule) !important;
+  }
+  .gloda-timeline-button,
+  #sortby {
+    border-radius: 999px !important;
+    padding-inline-start: 10px !important;
+  }
+
+  /* Messages: the same cards as the inbox list. */
+  .message {
+    font-family: "Inter", sans-serif !important;
+    font-size: 0.95em !important;
+    padding: 14px 16px !important;
+    margin-block: 0 4px !important;
+    border: none !important;
+    border-radius: 10px !important;
+    background-color: var(--gallery-card) !important;
+    box-shadow: none !important;
+  }
+  .message:hover {
+    background-color: var(--gallery-card-hover) !important;
+  }
+  .message:focus {
+    padding: 12px 14px !important;
+    outline: 1px solid var(--gallery-rule) !important;
+  }
+  .message:hover .message-subject {
+    color: var(--layout-color-0) !important;
+  }
+  .message .message-subject {
+    color: var(--layout-color-0) !important;
+    font-size: 1.05em !important;
+    font-weight: 600 !important;
+    border-radius: 4px !important;
+  }
+  .message .message-subject:is(:hover, :focus) {
+    background-color: transparent !important;
+    color: var(--layout-color-0) !important;
+    text-decoration: underline !important;
+    text-decoration-color: var(--layout-color-3) !important;
+    text-underline-offset: 3px !important;
+  }
+  .message-author,
+  .message-recipients,
+  .message-recipients-group {
+    color: var(--layout-color-2) !important;
+  }
+
+  /* Excerpts in the mail font, a step quieter than the subject. */
+  .message-body {
+    font-family: "Inter", sans-serif !important;
+    font-size: 0.95em !important;
+    line-height: 1.5 !important;
+    color: var(--layout-color-2) !important;
+    margin-inline-start: 0 !important;
+    margin-top: 0.4em !important;
+  }
+  .message-body-fulltext-match {
+    background-color: light-dark(var(--color-gray-30), var(--color-gray-60)) !important;
+    color: var(--layout-color-0) !important;
+    font-weight: 600 !important;
+    border-radius: 3px !important;
+    padding-inline: 2px !important;
+  }
+
+  .message-star[starred="true"] {
+    fill: var(--layout-color-1) !important;
+    stroke: var(--layout-color-1) !important;
+  }
+  .empty:is(span) {
+    color: var(--layout-color-2) !important;
   }
 }

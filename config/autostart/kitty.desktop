@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Kitty
+Comment=Open a maximized terminal at login
+Exec=sh -c "sleep 3; exec $HOME/.local/bin/kitty --start-as=maximized"
+OnlyShowIn=XFCE;
+X-GNOME-Autostart-enabled=true

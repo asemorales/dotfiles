@@ -7,6 +7,10 @@ rooms:
   light: [monet, monsted, polenov, kuindzhi]
   navy: [bierstadt, bierstadt_landers, bierstadt_valley, bierstadt_storm]   # all Bierstadt
 
+# The painting behind the boot menu (gallery-grub) and the login screen
+# (gallery-greeter) in both rooms. Leave it out to use each room's first painting.
+login: bierstadt_lucerne
+
 # Paintings are cropped to fill the screen. This is the share of the cut taken
 # from the top (1 = all sky, 0 = all foreground). Crop sky or land, never figures.
 crop_top:
@@ -20,6 +24,8 @@ crop_top:
   bierstadt_landers: 0.8    # the encampment fills the foreground
   bierstadt_valley: 0.75    # cattle by the river
   bierstadt_storm: 0.5
+  bierstadt_staubbach: 0.5  # the peaks and the falls, the valley floor below
+  bierstadt_lucerne: 0.4    # the campfire and the cattle on the path, bottom left
   kuindzhi_moon: 0.45  # keep the moon clear of the panel and the river in view
 
 # Caption lines that replace the website's `life` sentence. An empty string
@@ -80,3 +86,16 @@ extra:
     collection: Brooklyn Museum, New York
     source: https://commons.wikimedia.org/wiki/File:Albert_Bierstadt_-_A_Storm_in_the_Rocky_Mountains,_Mt._Rosalie_-_Google_Art_Project.jpg
     image: bierstadt-storm-rosalie
+  bierstadt_staubbach:
+    artist: Albert Bierstadt
+    title: Staubbach Falls, Near Lauterbrunnen, Switzerland
+    year: "c. 1865"
+    source: https://commons.wikimedia.org/wiki/File:Bierstadt_Albert_Staubbach_Falls_Near_Lauterbrunnen_Switzerland.jpg
+    image: bierstadt-staubbach-falls
+  bierstadt_lucerne:
+    artist: Albert Bierstadt
+    title: Lake Lucerne
+    year: "1858"
+    collection: National Gallery of Art, Washington
+    source: https://commons.wikimedia.org/wiki/File:Albert_Bierstadt_-_Lake_Lucerne_-_Google_Art_Project.jpg
+    image: bierstadt-lake-lucerne

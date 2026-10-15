@@ -31,10 +31,11 @@ def px(v):
 
 
 FONTS = os.path.expanduser("~/.local/share/fonts/gallery")
-INTER = "/usr/share/fonts/opentype/inter"
 SERIF = os.path.join(FONTS, "SourceSerif4[opsz,wght].ttf")
 MONO = os.path.join(FONTS, "IBMPlexMono-Regular.ttf")
 MONO_MEDIUM = os.path.join(FONTS, "IBMPlexMono-Medium.ttf")
+KITTY_MONO = os.path.join(FONTS, "DMMono-Regular.ttf")   # kitty's font_family
+KITTY_MONO_MEDIUM = os.path.join(FONTS, "DMMono-Medium.ttf")
 
 # The two rooms, from gtk-3.0/_palette.css and _roles.css
 ROOMS = {
@@ -89,7 +90,11 @@ def spaced(draw, xy, text, f, fill, tracking):
 
 
 def pct(v, total):
-    return f"{v / total * 100:.3f}%"
+    """GRUB only reads whole percents, so the rest goes on as pixels ("5%+36")."""
+    v = round(v)
+    p = v * 100 // total
+    rest = v - p * total // 100
+    return f"{p}%+{rest}" if rest else f"{p}%"
 
 
 def rounded(size, radius, fill):
@@ -130,7 +135,7 @@ def background(room, painting, caption):
 
     d = ImageDraw.Draw(bg)
     x = CARD_X + PAD
-    spaced(d, (x, KICKER_Y), os.uname().nodename.upper(), font(MONO_MEDIUM, 14), c["dim"], px(3))
+    d.text((x, KICKER_Y), os.uname().nodename.lower(), font=font(KITTY_MONO, 15), fill=c["dim"])
     d.text((x, HEAD_Y), "Choose a system", font=font(SERIF, 36, 500), fill=c["fg"])
     d.line((x, RULE1_Y, CARD_X + CARD_W - PAD, RULE1_Y), fill=c["rule"], width=S)
     d.line((x, RULE2_Y, CARD_X + CARD_W - PAD, RULE2_Y), fill=c["rule"], width=S)
@@ -150,9 +155,10 @@ def background(room, painting, caption):
     return bg.convert("RGB")
 
 
-def pill(path, color, w, h, r):
-    """The selection pill as GRUB's nine-slice: corners as _nw.._se, edges and centre stretched."""
-    full = rounded((w, h), r, color)
+def pill(path, color, w, h, r, radius=None):
+    """The selection pill as GRUB's nine-slice: corners as _nw.._se, edges and centre stretched.
+    `r` is the slice size and `radius` the corner rounding (`r` unless given)."""
+    full = rounded((w, h), r if radius is None else radius, color)
     parts = {
         "nw": (0, 0, r, r), "n": (r, 0, w - r, r), "ne": (w - r, 0, w, r),
         "w": (0, r, r, h - r), "c": (r, r, w - r, h - r), "e": (w - r, r, w, h - r),
@@ -162,9 +168,43 @@ def pill(path, color, w, h, r):
         full.crop(box).save(f"{path}_{name}.png")
 
 
+def terminal_box(path, c):
+    """The console and editor: a card like the menu's, floating over the boot
+    menu. GRUB draws the slices outside the terminal, so each corner holds the
+    shadow, the hairline frame and the padding. The text area itself is filled
+    by gfxterm with kitty's background (06_gallery sets background_color)."""
+    r = px(40)                 # slice size: shadow margin + padding
+    m = px(16)                 # shadow margin; the card's edge sits r - m outside the text
+    size = 3 * r
+    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    box = (m, m, size - m, size - m)
+    img = shadow(img, box, RADIUS, px(6), px(4), 110)
+    img.alpha_composite(rounded((size - 2 * m, size - 2 * m), RADIUS, c["frame"]), (m, m))
+    img.alpha_composite(rounded((size - 2 * m - 2 * S, size - 2 * m - 2 * S), RADIUS - S, c["card"]), (m + S, m + S))
+    parts = {
+        "nw": (0, 0, r, r), "n": (r, 0, 2 * r, r), "ne": (2 * r, 0, size, r),
+        "w": (0, r, r, 2 * r), "c": (r, r, 2 * r, 2 * r), "e": (2 * r, r, size, 2 * r),
+        "sw": (0, 2 * r, r, size), "s": (r, 2 * r, 2 * r, size), "se": (2 * r, 2 * r, size, size),
+    }
+    for name, b in parts.items():
+        img.crop(b).save(f"{path}_{name}.png")
+
+
 def mkfont(out, src, size, name):
+    """Build a .pf2 and return the name GRUB knows it by.
+
+    grub-mkfont takes -n as the family only and stores "FAMILY STYLE PIXELS"
+    (e.g. "Gallery DM Mono 18 Regular 36"). GRUB matches font names exactly
+    and silently falls back to the last font loaded, so the theme has to use
+    the stored name, read back from the file's NAME section.
+    """
     subprocess.run(["grub-mkfont", "-s", str(size), "-n", name, "-o", out, src], check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    with open(out, "rb") as fh:
+        data = fh.read(4096)
+    i = data.index(b"NAME") + 4
+    n = int.from_bytes(data[i:i + 4], "big")
+    return data[i + 4:i + 4 + n].rstrip(b"\0").decode()
 
 
 def main():
@@ -174,14 +214,15 @@ def main():
     # JPEG: a 4K PNG is ~10 MB and GRUB takes seconds to decode it
     background(room, painting, caption).save(os.path.join(out, "background.jpg"), quality=92)
     pill(os.path.join(out, "select"), c["sel_bg"], px(48), px(48), px(8))
-    # The console and editor: a plain card with a hairline frame
-    pill(os.path.join(out, "terminal_box"), c["card"], px(48), px(48), px(8))
+    terminal_box(os.path.join(out, "terminal_box"), c)
 
-    # GRUB fonts are bitmaps at a fixed pixel size; the names keep the point size
-    mkfont(os.path.join(out, "inter-18.pf2"), f"{INTER}/Inter-Regular.otf", px(18), "Gallery Inter 18")
-    mkfont(os.path.join(out, "inter-medium-18.pf2"), f"{INTER}/Inter-Medium.otf", px(18), "Gallery Inter Medium 18")
-    mkfont(os.path.join(out, "mono-14.pf2"), MONO, px(14), "Gallery Mono 14")
-    mkfont(os.path.join(out, "mono-16.pf2"), MONO, px(16), "Gallery Mono 16")
+    # GRUB fonts are bitmaps at a fixed pixel size; the names keep the point size.
+    # The systems and the console/editor are in kitty's DM Mono, like the hostname.
+    term = mkfont(os.path.join(out, "dm-mono-16.pf2"), KITTY_MONO, px(16), "Gallery DM Mono 16")
+    item = mkfont(os.path.join(out, "dm-mono-18.pf2"), KITTY_MONO, px(18), "Gallery DM Mono 18")
+    sel = mkfont(os.path.join(out, "dm-mono-medium-18.pf2"), KITTY_MONO_MEDIUM, px(18),
+                 "Gallery DM Mono Medium 18")
+    label = mkfont(os.path.join(out, "mono-14.pf2"), MONO, px(14), "Gallery Mono 14")
 
     inner_x, inner_w = CARD_X + PAD - px(14), CARD_W - 2 * PAD + px(28)
     theme = f"""# Gallery GRUB theme ({room} room). Generated by grub-build.py; edit that, not this.
@@ -189,12 +230,12 @@ def main():
 title-text: ""
 desktop-image: "background.jpg"
 desktop-color: "{c['card']}"
-terminal-font: "Gallery Mono 16"
+terminal-font: "{term}"
 terminal-box: "terminal_box_*.png"
-terminal-left: "10%"
-terminal-top: "10%"
-terminal-width: "80%"
-terminal-height: "80%"
+terminal-left: "16%"
+terminal-top: "14%"
+terminal-width: "68%"
+terminal-height: "72%"
 terminal-border: "0"
 
 + boot_menu {{
@@ -202,8 +243,8 @@ terminal-border: "0"
   top = {pct(MENU_Y, H)}
   width = {pct(inner_w, W)}
   height = {pct(MENU_H, H)}
-  item_font = "Gallery Inter 18"
-  selected_item_font = "Gallery Inter Medium 18"
+  item_font = "{item}"
+  selected_item_font = "{sel}"
   item_color = "{c['fg']}"
   selected_item_color = "{c['sel_fg']}"
   selected_item_pixmap_style = "select_*.png"
@@ -224,7 +265,7 @@ terminal-border: "0"
   id = "__timeout__"
   text = "Starting in %d s"
   color = "{c['dim']}"
-  font = "Gallery Mono 14"
+  font = "{label}"
 }}
 """
     with open(os.path.join(out, "theme.txt"), "w", encoding="utf-8") as fh:

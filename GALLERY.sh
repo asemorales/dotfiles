@@ -4,8 +4,9 @@
 #   - Fonts: Source Serif 4, IBM Plex Mono and DM Mono into ~/.local/share/fonts (Inter comes from apt)
 #   - Paintings: the original files into ~/Pictures/gallery
 #   - Icons: the Gallery and Gallery-Navy icon themes, built from Suru++ Asprómauros
+#   - Cursors: Bibata Modern in the rooms' colours, cream for navy and ink for light
 #   - Xfce settings held by xfconf: fonts, window titles and shadows, workspaces,
-#     and the single top panel
+#     the single top panel, and app shortcuts
 #
 # Run INSTALL.sh first, then this, from inside an Xfce session.
 # Needs: curl, imagemagick, python3-yaml, python3-pil, conky (for the caption),
@@ -61,6 +62,12 @@ commons kuindzhi-moonlit-dnieper.jpg    "File:Arkhip Kuindzhi - Ночь на Д
 step "Icons"
 python3 -I "$HOME/.local/share/icons/gallery-icons-build.py"
 
+# ----------------------------------------------------------------- cursors
+# gallery-mode picks the variant for each room.
+step "Cursors"
+# Bibata Modern recoloured in ink and paper, linked into ~/.icons as well.
+python3 -I "$(dirname "$(readlink -f "$0")")/themes/cursors/build.py"
+
 # -------------------------------------------------------------- xfconf
 step "Xfce settings"
 set_prop() {  # channel property type value
@@ -77,7 +84,6 @@ set_ints() {  # channel property int...
 # Source Serif 4 for window titles
 set_prop xsettings /Gtk/FontName string "Inter 10"
 set_prop xsettings /Gtk/MonospaceFontName string "IBM Plex Mono 11"
-set_prop xsettings /Gtk/CursorThemeName string Adwaita
 set_prop xsettings /Xft/Antialias int 1
 set_prop xsettings /Xft/Hinting int 1
 set_prop xsettings /Xft/HintStyle string hintslight
@@ -96,6 +102,10 @@ set_prop xfwm4 /general/shadow_delta_height int 4
 set_prop xfwm4 /general/workspace_count int 4
 xfconf-query -c xfwm4 -p /general/workspace_names -r 2>/dev/null || true
 xfconf-query -c xfwm4 -p /general/workspace_names -n -t string -s I -t string -s II -t string -s III -t string -s IV
+
+# Shortcuts: Super+K for kitty, Super+O for Obsidian
+set_prop xfce4-keyboard-shortcuts "/commands/custom/<Super>k" string "$HOME/.local/bin/kitty"
+set_prop xfce4-keyboard-shortcuts "/commands/custom/<Super>o" string obsidian
 
 # Panel: one 40px bar across the top. The plugin ids matter: the GTK theme
 # styles #applicationsmenu-1, #tasklist-2, #pager-30, #clock-23 and friends.

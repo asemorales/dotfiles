@@ -49,17 +49,27 @@ link_local_path() {
   do_link "$REPO/local/$1" "$HOME/.local/$1"
 }
 
-# The profile Thunderbird opens, from its [Install...] section in profiles.ini.
-thunderbird_profile() {
+# The profile Thunderbird or Firefox opens, from the [Install...] section in
+# profiles.ini. Usage: mozilla_profile ~/.thunderbird
+mozilla_profile() {
   awk -F= '/^\[Install/ { s = 1; next } /^\[/ { s = 0 } s && $1 == "Default" { print $2; exit }' \
-    "$HOME/.thunderbird/profiles.ini" 2>/dev/null || true
+    "$1/profiles.ini" 2>/dev/null || true
 }
 
 link_thunderbird_path() {
   local profile
-  profile="$(thunderbird_profile)"
+  profile="$(mozilla_profile "$HOME/.thunderbird")"
   [ -n "$profile" ] || return 0   # Thunderbird has not run yet
   do_link "$REPO/thunderbird/$1" "$HOME/.thunderbird/$profile/$1"
+}
+
+# chrome/userContent.css is not linked: gallery-mode writes it from the repo
+# copy with the room's painting in it.
+link_firefox_path() {
+  local profile
+  profile="$(mozilla_profile "$HOME/.mozilla/firefox")"
+  [ -n "$profile" ] || return 0   # Firefox has not run yet
+  do_link "$REPO/firefox/$1" "$HOME/.mozilla/firefox/$profile/$1"
 }
 
 link_dot_path bashrc
@@ -74,6 +84,7 @@ link_dot_path ssh/config
 
 link_config_path autostart/gallery-bar.desktop
 link_config_path autostart/gallery-caption.desktop
+link_config_path autostart/kitty.desktop
 link_config_path fish/conf.d/uv.env.fish
 link_config_path gallery/wall.yml
 link_config_path btop/themes
@@ -109,6 +120,7 @@ link_local_path bin/gallery-caption
 link_local_path bin/gallery-bar
 link_local_path bin/gallery-greeter
 link_local_path bin/gallery-grub
+link_local_path bin/gallery-plymouth
 link_local_path bin/gallery-root
 link_local_path share/icons/gallery-icons-build.py
 link_local_path share/applications/yazi.desktop
@@ -117,6 +129,9 @@ link_local_path share/xfce4/helpers/yazi.desktop
 link_thunderbird_path user.js
 link_thunderbird_path chrome/userChrome.css
 link_thunderbird_path chrome/userContent.css
+
+link_firefox_path user.js
+link_firefox_path chrome/userChrome.css
 
 link_claude_path settings.json
 link_claude_path skills/rewrite-natural
