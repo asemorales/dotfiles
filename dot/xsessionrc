@@ -1,0 +1,13 @@
+# Sourced by Debian's Xsession before Xfce starts.
+
+# The login screen runs at 1920x1080 (the xrandr "reader" line in
+# lightdm-gtk-greeter.conf) and leaves its picture in the root pixmap
+# properties. Back at 3840x2160, xfwm4's compositor tiles that picture 2x2
+# until xfdesktop draws. Replace it with the room's page colour.
+case $(cat "$HOME/.local/state/gallery/mode" 2>/dev/null) in
+  light) gallery_page='#F2ECDF' ;;
+  *)     gallery_page='#191612' ;;
+esac
+"$HOME/.local/bin/gallery-root" "$gallery_page" 2>/dev/null \
+  || xsetroot -solid "$gallery_page" 2>/dev/null || true
+unset gallery_page

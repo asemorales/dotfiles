@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# gallery-grub: dress the boot menu (GRUB) in the current room, like the login screen.
+#
+#   gallery-grub        build the theme from the first painting of the room,
+#                       install it to /boot/grub/themes/gallery, point
+#                       /etc/default/grub at it and run update-grub (asks for sudo)
+#
+# The theme itself is built by themes/Gallery/grub-build.py. Run this again
+# after `gallery-mode light|navy` or after changing the paintings, alongside
+# gallery-greeter. The first /etc/default/grub is kept as /etc/default/grub.pre-gallery.
+
+set -euo pipefail
+
+DATA_DIR="$HOME/.local/share/gallery"
+STATE_DIR="$HOME/.local/state/gallery"
+TSV="$DATA_DIR/paintings.tsv"
+BUILD="$HOME/code/dotfiles/themes/Gallery/grub-build.py"
+OUT="$DATA_DIR/grub"
+DEST=/boot/grub/themes/gallery
+CONF=/etc/default/grub
+DEFAULT_MODE=navy
+
+mode=$(cat "$STATE_DIR/mode" 2>/dev/null || echo "$DEFAULT_MODE")
+
+# The painting on the first workspace, the same one the login screen shows.
+key=$(head -n 1 "$DATA_DIR/room-$mode")
+painting=$(awk -F'\t' -v k="$key" '$1 == k { print $2 }' "$TSV")
+caption=$(awk -F'\t' -v k="$key" '$1 == k { print $7 }' "$TSV")
+[ -s "$painting" ] || { echo "no painting for $key; run gallery-mode data" >&2; exit 1; }
+
+rm -rf "$OUT"
+python3 -I "$BUILD" "$mode" "$painting" "$caption" "$OUT"
+
+sudo -v
+sudo rm -rf "$DEST"
+sudo install -d "$DEST"
+sudo install -m644 "$OUT"/* "$DEST/"
+
+# Keep the first original, then set only the keys the gallery owns.
+# The firmware only offers the panel's native 4K, so the theme is drawn for it.
+[ -e "$CONF.pre-gallery" ] || sudo cp -p "$CONF" "$CONF.pre-gallery"
+tmp=$(mktemp)
+python3 -I - "$CONF" > "$tmp" \
+  "GRUB_THEME=\"$DEST/theme.txt\"" \
+  "GRUB_GFXMODE=\"3840x2160,auto\"" \
+  "GRUB_TERMINAL_OUTPUT=\"gfxterm\"" <<'PY'
+import sys
+path, pairs = sys.argv[1], dict(kv.split("=", 1) for kv in sys.argv[2:])
+lines = open(path, encoding="utf-8").read().splitlines()
+seen = set()
+for i, line in enumerate(lines):
+    key = line.split("=", 1)[0].strip()
+    if key in pairs:
+        lines[i] = f"{key}={pairs[key]}"
+        seen.add(key)
+lines += [f"{k}={v}" for k, v in pairs.items() if k not in seen]
+print("\n".join(lines))
+PY
+sudo install -m644 "$tmp" "$CONF"
+rm -f "$tmp"
+
+sudo update-grub
+echo "boot menu: $mode, $key. Seen at the next boot."

@@ -1,0 +1,166 @@
+/* Gallery for Thunderbird.
+ *
+ * Thunderbird 140 builds its whole interface from a few grey, blue and
+ * white tokens. This file swaps those tokens for the Gallery palette
+ * (themes/Gallery/gtk-3.0/_palette.css), so every pane follows along.
+ * It follows the desktop: Gallery-Navy reads as dark and Gallery reads as light,
+ * so `gallery-mode` switches Thunderbird too.
+ *
+ * Selection already uses the GTK accent (ink, or the inverted grey in the
+ * dark room). The blues fold into ink, as they do in the GTK theme.
+ *
+ * !important is needed because user sheets lose to Thunderbird's own
+ * declarations otherwise. */
+
+/* Light room: a book page. Cream stock, sepia-black ink. */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-white:   #F2ECDF !important;   /* paper: the main page */
+    --color-gray-05: #EFE8DA !important;
+    --color-gray-10: #ECE5D5 !important;   /* linen: sidebars */
+    --color-gray-20: #E5DDCB !important;
+    --color-gray-30: #DDD4C1 !important;   /* stone: rules, hover */
+    --color-gray-40: #BDB4A4 !important;
+    --color-gray-50: #857C6F !important;   /* quiet text */
+    --color-gray-60: #6E6965 !important;
+    --color-gray-70: #4A403A !important;
+    --color-gray-80: #352B25 !important;
+    --color-gray-90: #231A15 !important;   /* ink */
+    --color-black:   #140E0B !important;
+
+    --color-blue-40: #4A403A !important;
+    --color-blue-50: #4A403A !important;
+    --color-blue-60: #231A15 !important;
+    --color-blue-70: #140E0B !important;
+
+    --color-primary-soft:    #E5DDCB !important;
+    --color-primary-default: #231A15 !important;
+    --color-primary-hover:   #352B25 !important;
+    --color-primary-pressed: #4A403A !important;
+  }
+}
+
+/* Dark room: gwern.net's dark page, its greys tinted slightly brown. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-black:   #100D0A !important;
+    --color-gray-90: #191612 !important;   /* night: the main page */
+    --color-gray-80: #25211C !important;   /* night_panel: sidebars */
+    --color-gray-70: #332E27 !important;
+    --color-gray-60: #4D463E !important;   /* night_rule: hairlines, hover */
+    --color-gray-50: #81786D !important;   /* night_mid */
+    --color-gray-40: #9E958A !important;   /* night_dim: quiet text */
+    --color-gray-30: #C9C1B4 !important;
+    --color-gray-20: #E0D9CD !important;   /* night_sel */
+    --color-gray-10: #F2EDE4 !important;   /* night_text: body text */
+    --color-gray-05: #F7F3EC !important;
+    --color-white:   #FBF8F2 !important;
+
+    /* blue-40 is text on the page; blue-50 sits behind white badge numbers. */
+    --color-blue-40: #F2EDE4 !important;
+    --color-blue-50: #6B6258 !important;
+    --color-blue-60: #81786D !important;
+    --color-blue-70: #9E958A !important;
+
+    --color-primary-soft:    #332E27 !important;
+    --color-primary-default: #E0D9CD !important;
+    --color-primary-hover:   #F2EDE4 !important;
+    --color-primary-pressed: #C9C1B4 !important;
+  }
+}
+
+/* The same greys stand in for the indigo "ink" scale used by the spaces bar. */
+:root {
+  --color-ink-10: var(--color-gray-10) !important;
+  --color-ink-20: var(--color-gray-20) !important;
+  --color-ink-30: var(--color-gray-30) !important;
+  --color-ink-40: var(--color-gray-40) !important;
+  --color-ink-50: var(--color-gray-50) !important;
+  --color-ink-60: var(--color-gray-60) !important;
+  --color-ink-70: var(--color-gray-70) !important;
+  --color-ink-80: var(--color-gray-80) !important;
+  --color-ink-90: var(--color-gray-90) !important;
+}
+
+/* ---- Quieter chrome ------------------------------------------------------ */
+
+/* Status colours fold into ink too: green unread dots, the yellow "new" star,
+   and every coloured folder icon. */
+:root {
+  --color-green-30: light-dark(#4A403A, #E0D9CD) !important;
+  --color-green-40: light-dark(#231A15, #E0D9CD) !important;
+  --color-green-50: light-dark(#231A15, #E0D9CD) !important;
+  --color-green-60: light-dark(#231A15, #F2EDE4) !important;
+  --color-yellow-30: light-dark(#231A15, #F2EDE4) !important;
+  --color-amber-50: light-dark(#231A15, #F2EDE4) !important;
+  --color-amber-60: light-dark(#231A15, #F2EDE4) !important;
+
+  --folder-color-inbox: var(--layout-color-2) !important;
+  --folder-color-draft: var(--layout-color-2) !important;
+  --folder-color-sent: var(--layout-color-2) !important;
+  --folder-color-archive: var(--layout-color-2) !important;
+  --folder-color-spam: var(--layout-color-2) !important;
+  --folder-color-trash: var(--layout-color-2) !important;
+  --folder-color-template: var(--layout-color-2) !important;
+  --folder-color-newsletter: var(--layout-color-2) !important;
+  --folder-color-rss: var(--layout-color-2) !important;
+  --folder-color-outbox: var(--layout-color-2) !important;
+  --folder-color-folder: var(--layout-color-2) !important;
+  --folder-color-folder-filter: var(--layout-color-2) !important;
+  --folder-color-folder-rss: var(--layout-color-2) !important;
+
+  /* No grey strip behind the tabs. */
+  --tabs-toolbar-background-color: transparent !important;
+  --tabs-toolbar-box-shadow: none !important;
+}
+
+/* Titles in the desktop's serif small caps, like the top bar and GTK headers. */
+#folderTree li[data-server-type] > .container > .name,
+#threadPaneFolderName {
+  font-family: "Source Serif 4", serif !important;
+  font-weight: 600 !important;
+  font-feature-settings: "smcp", "c2sc" !important;
+  letter-spacing: 0.04em !important;
+}
+#threadPaneFolderName {
+  font-size: 1.25em !important;
+  font-feature-settings: "smcp" !important;
+}
+
+/* Unread counts as plain quiet numbers instead of grey pills. */
+.unread-count {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: var(--layout-color-2) !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* New Message: one solid ink button, the only filled control on screen. */
+#folderPaneWriteMessage {
+  background-color: var(--color-primary-default) !important;
+  color: var(--color-white) !important;
+  border-color: transparent !important;
+  border-radius: 999px !important;
+  /* The + icon is a background image, so the text starts after it. */
+  background-position: 14px center !important;
+  padding-inline: calc(14px + var(--icon-size) + 8px) 16px !important;
+}
+@media (prefers-color-scheme: dark) {
+  #folderPaneWriteMessage { color: #191612 !important; }
+}
+
+/* Message cards: no boxes. Rows sit on the page and only hover and selection
+   show a soft rounded fill. */
+#threadTree[rows="thread-card"] {
+  --tree-card-block: 2px !important;
+  --tree-card-content-radius: 10px !important;
+  --tree-card-content-inline: 12px !important;
+
+  & .card-layout {
+    --tree-card-border: transparent !important;
+  }
+  & .card-layout > td > .card-container {
+    padding-block: 6px !important;
+    box-shadow: none !important;
+  }
+}

@@ -26,9 +26,10 @@
 | --- | --- | --- |
 | `dot/` | `~/.<name>` | Shell startup files, `gitconfig`, `dmrc`, `ssh/config` |
 | `config/` | `~/.config/<name>` | btop themes, eww, fish, git, GTK bookmarks, MIME defaults, Kitty, neofetch, Neovim, systemd user units, XDG folders, VSCodium, xfce4 terminal and helpers, Yazi |
+| `thunderbird/` | `~/.thunderbird/<profile>/<name>` | Gallery colours and fonts for Thunderbird (`user.js`, `chrome/userChrome.css`, `chrome/userContent.css`) |
 | `claude/` | `~/.claude/<name>` | Claude Code settings and skills |
 | `themes/` | `~/.themes/<name>` | Gallery and Gallery-Navy themes |
-| `local/` | `~/.local/<name>` | `gallery-mode`, `gallery-caption`, `gallery-bar`, icon build script, Yazi launcher |
+| `local/` | `~/.local/<name>` | `gallery-mode`, `gallery-caption`, `gallery-bar`, `gallery-greeter`, `gallery-grub`, `gallery-root`, icon build script, Yazi launcher |
 
 ## Install
 
@@ -44,6 +45,10 @@ To fix warnings, compare the two files with `diff`. Keep the version you want in
 After `INSTALL.sh`, run `GALLERY.sh` inside an Xfce session. This fetches the fonts and paintings, builds the icon themes, and applies Xfce settings in xfconf (fonts, window shadows, workspaces, the top panel).
 
 Switch themes via terminal with `gallery-mode navy`, `gallery-mode light` or `gallery-mode toggle`. Navy is the default.
+
+To dress the login screen in the current room, run `gallery-greeter`. It asks for sudo, because the login screen can only read system folders. Run it again after switching rooms.
+
+To dress the boot menu to match, run `gallery-grub`. It builds a GRUB theme from the same painting and palette, installs it to `/boot/grub/themes/gallery` and runs `update-grub`, so it also asks for sudo. The first `/etc/default/grub` is kept as `/etc/default/grub.pre-gallery`.
 
 ## Add a new config
 

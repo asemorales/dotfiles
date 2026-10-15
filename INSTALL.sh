@@ -49,6 +49,19 @@ link_local_path() {
   do_link "$REPO/local/$1" "$HOME/.local/$1"
 }
 
+# The profile Thunderbird opens, from its [Install...] section in profiles.ini.
+thunderbird_profile() {
+  awk -F= '/^\[Install/ { s = 1; next } /^\[/ { s = 0 } s && $1 == "Default" { print $2; exit }' \
+    "$HOME/.thunderbird/profiles.ini" 2>/dev/null || true
+}
+
+link_thunderbird_path() {
+  local profile
+  profile="$(thunderbird_profile)"
+  [ -n "$profile" ] || return 0   # Thunderbird has not run yet
+  do_link "$REPO/thunderbird/$1" "$HOME/.thunderbird/$profile/$1"
+}
+
 link_dot_path bashrc
 link_dot_path bash_profile
 link_dot_path bash_logout
@@ -56,6 +69,7 @@ link_dot_path profile
 link_dot_path zshrc
 link_dot_path gitconfig
 link_dot_path dmrc
+link_dot_path xsessionrc
 link_dot_path ssh/config
 
 link_config_path autostart/gallery-bar.desktop
@@ -93,9 +107,16 @@ link_theme_path Gallery-Navy
 link_local_path bin/gallery-mode
 link_local_path bin/gallery-caption
 link_local_path bin/gallery-bar
+link_local_path bin/gallery-greeter
+link_local_path bin/gallery-grub
+link_local_path bin/gallery-root
 link_local_path share/icons/gallery-icons-build.py
 link_local_path share/applications/yazi.desktop
 link_local_path share/xfce4/helpers/yazi.desktop
+
+link_thunderbird_path user.js
+link_thunderbird_path chrome/userChrome.css
+link_thunderbird_path chrome/userContent.css
 
 link_claude_path settings.json
 link_claude_path skills/rewrite-natural

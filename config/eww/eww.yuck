@@ -46,7 +46,7 @@
     (sep)
     (label :class "word" :tooltip {EWW_BATTERY.BAT0.status}
       :text "bat ${EWW_BATTERY.BAT0.capacity}%${EWW_BATTERY.BAT0.status == 'Charging' ? ' +' : ''}")
-    (button :class "word fin" :onclick "xfce4-session-logout &" "Fin.")))
+    (button :class "word fin" :onclick "xfce4-session-logout --halt &" "Fin.")))
 
 (defwidget bar []
   (centerbox :class "bar"

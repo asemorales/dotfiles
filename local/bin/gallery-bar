@@ -101,7 +101,9 @@ instruments() {
 start() {
   command -v eww >/dev/null || { echo "gallery-bar: eww is not installed" >&2; exit 1; }
   room
-  xfce4-panel --quit 2>/dev/null || true    # --quit stops the session restarting it
+  # --quit stops the session restarting it. Only send it to a running panel:
+  # with none running, xfce4-panel pops up a "No running instance" dialog.
+  if pgrep -x xfce4-panel >/dev/null; then xfce4-panel --quit 2>/dev/null || true; fi
   eww daemon 2>/dev/null || true
   eww open bar
 }
