@@ -54,6 +54,7 @@ commons bierstadt-sierra-nevada.jpg     "File:Albert Bierstadt - Among the Sierr
 commons bierstadt-landers-peak.jpg      "File:Albert Bierstadt - The Rocky Mountains, Lander's Peak.jpg"
 commons bierstadt-valley-of-yosemite.jpg "File:Albert Bierstadt - Valley of the Yosemite - Google Art Project.jpg"
 commons bierstadt-storm-rosalie.jpg     "File:Albert Bierstadt - A Storm in the Rocky Mountains, Mt. Rosalie - Google Art Project.jpg"
+commons bierstadt-rocky-mountain-landscape.jpg "File:Albert Bierstadt - Rocky Mountain Landscape - Google Art Project.jpg"
 commons church-twilight.jpg             "File:Frederic Edwin Church - Twilight in the Wilderness.jpg"
 commons aivazovsky-ninth-wave.jpg       "File:Hovhannes Aivazovsky - The Ninth Wave - Google Art Project.jpg"
 commons kuindzhi-moonlit-dnieper.jpg    "File:Arkhip Kuindzhi - Ночь на Днепре - Google Art Project.jpg"

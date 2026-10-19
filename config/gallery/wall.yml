@@ -5,7 +5,7 @@
 # _data/paintings.yml or from `extra` below.
 rooms:
   light: [monet, monsted, polenov, kuindzhi]
-  navy: [bierstadt, bierstadt_landers, bierstadt_valley, bierstadt_storm]   # all Bierstadt
+  navy: [bierstadt, bierstadt_landers, bierstadt_valley, bierstadt_rocky]   # all Bierstadt
 
 # The painting behind the boot menu (gallery-grub) and the login screen
 # (gallery-greeter) in both rooms. Leave it out to use each room's first painting.
@@ -24,6 +24,7 @@ crop_top:
   bierstadt_landers: 0.8    # the encampment fills the foreground
   bierstadt_valley: 0.75    # cattle by the river
   bierstadt_storm: 0.5
+  bierstadt_rocky: 0.65     # the deer by the water, bottom centre
   bierstadt_staubbach: 0.5  # the peaks and the falls, the valley floor below
   bierstadt_lucerne: 0.4    # the campfire and the cattle on the path, bottom left
   kuindzhi_moon: 0.45  # keep the moon clear of the panel and the river in view
@@ -99,3 +100,10 @@ extra:
     collection: National Gallery of Art, Washington
     source: https://commons.wikimedia.org/wiki/File:Albert_Bierstadt_-_Lake_Lucerne_-_Google_Art_Project.jpg
     image: bierstadt-lake-lucerne
+  bierstadt_rocky:
+    artist: Albert Bierstadt
+    title: Rocky Mountain Landscape
+    year: "1870"
+    collection: The White House, Washington
+    source: https://commons.wikimedia.org/wiki/File:Albert_Bierstadt_-_Rocky_Mountain_Landscape_-_Google_Art_Project.jpg
+    image: bierstadt-rocky-mountain-landscape
