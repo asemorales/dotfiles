@@ -35,7 +35,8 @@
     (label :class "word" :tooltip "${round(EWW_DISK['/'].free / 1073741824, 0)} GB free on /"
       :text "disk ${round(EWW_DISK['/'].used_perc, 0)}%")
     (sep)
-    (button :class "word" :onclick "nm-connection-editor &" :tooltip "Network" network)
+    (button :class "word" :onclick "gallery-bar wifi" :onrightclick "nm-connection-editor &"
+            :tooltip "Network. Click to join, right-click for saved connections" network)
     (sep)
     (eventbox :onscroll "gallery-bar volume-{}"
       (box :class "volume" :space-evenly false :spacing 8

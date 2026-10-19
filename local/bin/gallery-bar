@@ -6,6 +6,7 @@
 #   gallery-bar room         recolour the bar for the current gallery-mode room
 #   gallery-bar goto N       switch to workspace N (from 0)
 #   gallery-bar instruments  open btop in its own Kitty window, or close it
+#   gallery-bar wifi         pick a nearby network in its own Kitty window, or close it
 #
 # eww calls these itself:
 #   workspaces, volume           print a new line whenever the value changes
@@ -22,7 +23,7 @@ STATE_DIR="$HOME/.local/state/gallery"
 TSV="$HOME/.local/share/gallery/paintings.tsv"
 export PATH="$HOME/.local/bin:$PATH"   # eww runs gallery-bar, gallery-mode and itself by name
 
-usage() { sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//'; }
+usage() { sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'; }
 
 room() {
   local mode
@@ -78,6 +79,32 @@ network() {
                END { if (!found) print "offline" }'
 }
 
+# nmtui's network list: everything in range, saved or not, with a password
+# prompt for new ones. nm-connection-editor only lists saved connections, so it
+# stays on right-click. A second click closes the window.
+wifi() {
+  if pkill -f "^kitty --class gallery-wifi" 2>/dev/null; then return 0; fi
+  nmcli dev wifi rescan >/dev/null 2>&1 || true
+  # newt (nmtui's toolkit) takes hex colours when COLORTERM=truecolor, so it is
+  # dressed in the current room's eww palette instead of its blue and red.
+  local scss page panel rule frame mid dim text
+  scss="$EWW_DIR/_$(gallery-mode status 2>/dev/null || echo navy).scss"
+  pal() { sed -n "s/^\$$1: *\(#[0-9A-Fa-f]\{6\}\);.*/\1/p" "$scss"; }
+  page=$(pal page) panel=$(pal panel) rule=$(pal rule) frame=$(pal frame)
+  mid=$(pal mid) dim=$(pal dim) text=$(pal text)
+  local -x COLORTERM=truecolor NEWT_COLORS="
+    root=$text,$page roottext=$dim,$page helpline=$dim,$page shadow=$page,$page
+    border=$frame,$panel window=$text,$panel title=$text,$panel label=$dim,$panel
+    textbox=$text,$panel acttextbox=$page,$text
+    listbox=$text,$panel actlistbox=$page,$text sellistbox=$text,$rule actsellistbox=$page,$text
+    entry=$text,$page disentry=$mid,$panel checkbox=$text,$panel actcheckbox=$page,$text
+    button=$text,$rule actbutton=$page,$text compactbutton=$dim,$panel
+    emptyscale=,$rule fullscale=,$text"
+  (setsid kitty --class gallery-wifi --title Network \
+     -o remember_window_size=no -o initial_window_width=72c -o initial_window_height=28c \
+     nmtui connect >/dev/null 2>&1 &)
+}
+
 # btop, the "instruments" behind cpu and mem, in the room's colours. btop
 # rewrites its config on exit, so the config stays local and only the themes
 # (config/btop/themes) live in the repo. A second click closes the window.
@@ -119,6 +146,7 @@ case "${1:-}" in
   stop)        stop ;;
   room)        room ;;
   instruments) instruments ;;
+  wifi)        wifi ;;
   goto)        xdotool set_desktop "${2:?workspace number}" ;;
   workspaces)  workspaces ;;
   volume)      volume ;;

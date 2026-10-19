@@ -1,4 +1,15 @@
 {
   "model": "opus",
-  "theme": "dark"
+  "extraKnownMarketplaces": {
+    "firebase": {
+      "source": {
+        "source": "github",
+        "repo": "firebase/agent-skills"
+      }
+    }
+  },
+  "theme": "dark",
+  "enabledPlugins": {
+    "firebase@firebase": true
+  }
 }
