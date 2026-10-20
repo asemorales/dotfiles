@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Build the Gallery cursors: Bibata Modern recoloured in the rooms' ink and paper.
+"""Build the Bierstadt cursors: Bibata Modern recoloured in the rooms' ink and paper.
 
     python3 -I themes/cursors/build.py
 
 Downloads the Bibata source once (GPL-3.0, ful1e5/Bibata_Cursor), swaps its
 placeholder colours, renders every SVG with rsvg-convert and packs the PNGs
-with xcursorgen into ~/.local/share/icons/Gallery-Cursors-{Navy,Light}.
+with xcursorgen into ~/.local/share/icons/bierstadt-cursors{-dark,}.
 Debian's libXcursor skips ~/.local/share/icons, so each theme is also linked
 into ~/.icons for kitty and xfwm4.
 """
@@ -18,7 +18,7 @@ import tomllib
 import urllib.request
 
 TAG = "v2.0.7"
-CACHE = os.path.expanduser(f"~/.cache/gallery/bibata-{TAG}")
+CACHE = os.path.expanduser(f"~/.cache/bierstadt/bibata-{TAG}")
 ICONS = os.path.expanduser("~/.local/share/icons")
 DOT_ICONS = os.path.expanduser("~/.icons")
 SIZES = [24, 32, 48, 64, 72, 96]
@@ -36,9 +36,9 @@ def variant(body, outline, mid):
 
 VARIANTS = {
     # A pale pointer on the dark room, outlined in its page colour.
-    "Gallery-Cursors-Navy": variant("#E3D8C4", "#191612", "#9E958A"),
+    "bierstadt-cursors-dark": variant("#E3D8C4", "#191612", "#9E958A"),
     # An ink pointer on paper.
-    "Gallery-Cursors-Light": variant("#231A15", "#F2ECDF", "#6B6560"),
+    "bierstadt-cursors": variant("#231A15", "#F2ECDF", "#6B6560"),
 }
 
 
@@ -98,7 +98,7 @@ def build(name, colours, config, svgs):
                     os.symlink(target, path)
 
     with open(os.path.join(out, "index.theme"), "w") as f:
-        f.write(f"[Icon Theme]\nName={name}\nComment=Bibata Modern in the gallery's ink and paper\n")
+        f.write(f"[Icon Theme]\nName={name}\nComment=Bibata Modern in Bierstadt's ink and paper\n")
     os.makedirs(DOT_ICONS, exist_ok=True)
     link = os.path.join(DOT_ICONS, name)
     if os.path.islink(link):

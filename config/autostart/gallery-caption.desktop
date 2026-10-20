@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Gallery caption
-Comment=The small wall label for the current painting
-Exec=sh -c "sleep 3; $HOME/.local/bin/gallery-caption start"
-OnlyShowIn=XFCE;
-X-GNOME-Autostart-enabled=true

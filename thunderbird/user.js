@@ -1,4 +1,4 @@
-// Gallery for Thunderbird. Thunderbird copies these into prefs.js on every start.
+// Bierstadt for Thunderbird. Thunderbird copies these into prefs.js on every start.
 
 // Load chrome/userChrome.css.
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
@@ -12,5 +12,5 @@ user_pref("font.name.monospace.x-western", "DM Mono");
 // Leave the message pane empty instead of showing the donation start page.
 user_pref("mailnews.start_page.enabled", false);
 
-// Let xfwm4 draw the title bar, so the window matches the Gallery frames.
+// Let xfwm4 draw the title bar, so the window matches the Bierstadt frames.
 user_pref("mail.tabs.drawInTitlebar", false);

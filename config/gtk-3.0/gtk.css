@@ -1,4 +1,4 @@
-/* Gallery: breathing room around the terminal text.
+/* Bierstadt: breathing room around the terminal text.
    Lives here rather than in the theme because user CSS outranks xfce4-terminal's own. */
 vte-terminal {
   padding: 12px;

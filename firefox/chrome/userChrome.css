@@ -1,10 +1,10 @@
-/* Gallery for Firefox.
+/* Bierstadt for Firefox.
  *
  * Firefox 140 colours its chrome from a handful of tokens
  * (browser/themes/shared/browser-colors.css). This file swaps them for the
- * Gallery palette (themes/Gallery/gtk-3.0/_palette.css). light-dark() follows
- * the desktop: Gallery-Navy reads as dark and Gallery reads as light, so
- * `gallery-mode` switches Firefox too. It needs the default "System theme",
+ * Bierstadt palette (themes/bierstadt/gtk-3.0/_palette.css). light-dark() follows
+ * the desktop: bierstadt-dark reads as dark and Bierstadt reads as light, so
+ * `bierstadt-mode` switches Firefox too. It needs the default "System theme",
  * not a dark or coloured one; user.js picks it.
  *
  * The tab strip is the linen panel, the selected tab and toolbar are the page

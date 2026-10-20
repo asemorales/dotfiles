@@ -1,5 +1,11 @@
 {
-    "workbench.colorTheme": "Tokyo Night",
+    "workbench.colorTheme": "Bierstadt Dark",
+    "window.autoDetectColorScheme": true,
+    "workbench.preferredDarkColorTheme": "Bierstadt Dark",
+    "workbench.preferredLightColorTheme": "Bierstadt Light",
+    "editor.fontFamily": "'DM Mono', monospace",
+    "terminal.integrated.fontFamily": "'DM Mono', monospace",
+    "editor.bracketPairColorization.enabled": false,
     "explorer.confirmDelete": false,
     "[html]": {
         "editor.defaultFormatter": "vscode.html-language-features"

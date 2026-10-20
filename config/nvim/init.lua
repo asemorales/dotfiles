@@ -1,4 +1,4 @@
--- Neovim settings. Colours: colors/gallery.lua
+-- Neovim settings. Colours: colors/bierstadt.lua
 
 local opt = vim.opt
 
@@ -25,26 +25,26 @@ opt.showmode = false
 -- Quiet status line: file name on the left, position on the right.
 opt.statusline = "  %f %m%r%=%{&filetype}   %l:%c  "
 
--- Match the room gallery-mode last chose (navy or light).
-local function gallery_room()
-  local f = io.open(vim.fn.expand("~/.local/state/gallery/mode"))
-  local mode = f and f:read("*l") or "navy"
+-- Match the room bierstadt-mode last chose (dark or light).
+local function bierstadt_room()
+  local f = io.open(vim.fn.expand("~/.local/state/bierstadt/mode"))
+  local mode = f and f:read("*l") or "dark"
   if f then f:close() end
   return mode == "light" and "light" or "dark"
 end
 
 local function apply_room()
-  local bg = gallery_room()
-  if vim.o.background ~= bg or vim.g.colors_name ~= "gallery" then
+  local bg = bierstadt_room()
+  if vim.o.background ~= bg or vim.g.colors_name ~= "bierstadt" then
     vim.o.background = bg
-    vim.cmd("colorscheme gallery")
+    vim.cmd("colorscheme bierstadt")
   end
 end
 
 opt.termguicolors = true
 apply_room()
 
--- Pick up a `gallery-mode toggle` when you come back to the window.
+-- Pick up a `bierstadt-mode toggle` when you come back to the window.
 vim.api.nvim_create_autocmd("FocusGained", { callback = apply_room })
 
 vim.g.mapleader = " "

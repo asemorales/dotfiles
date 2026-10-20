@@ -1,9 +1,9 @@
-/* Gallery for the message reader.
+/* Bierstadt for the message reader.
  *
  * In a dark desktop Thunderbird reads mail in dark mode: it strips the bright
  * backgrounds and dark text from each email, then paints what is left on
  * --color-gray-90 with --color-white text (shared/messageBody.css).
- * Those two tokens become the Gallery night page and its cream text.
+ * Those two tokens become the Bierstadt night page and its cream text.
  * Plain-text quotes and forwarded headers use gray-70 and gray-80. */
 
 @media (prefers-color-scheme: dark) {

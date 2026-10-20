@@ -8,5 +8,5 @@ prepend_keymap = [
 	{ on = [ "g", "r" ], run = "cd ~/code",            desc = "Go to ~/code" },
 	{ on = [ "g", "." ], run = "cd ~/code/dotfiles",   desc = "Go to the dotfiles" },
 	{ on = [ "g", "p" ], run = "cd ~/Pictures",        desc = "Go to ~/Pictures" },
-	{ on = [ "g", "w" ], run = "cd ~/Pictures/gallery", desc = "Go to the paintings" },
+	{ on = [ "g", "w" ], run = "cd ~/Pictures/bierstadt", desc = "Go to the paintings" },
 ]

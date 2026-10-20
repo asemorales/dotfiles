@@ -1,10 +1,10 @@
-/* Gallery for Thunderbird.
+/* Bierstadt for Thunderbird.
  *
  * Thunderbird 140 builds its whole interface from a few grey, blue and
- * white tokens. This file swaps those tokens for the Gallery palette
- * (themes/Gallery/gtk-3.0/_palette.css), so every pane follows along.
- * It follows the desktop: Gallery-Navy reads as dark and Gallery reads as light,
- * so `gallery-mode` switches Thunderbird too.
+ * white tokens. This file swaps those tokens for the Bierstadt palette
+ * (themes/bierstadt/gtk-3.0/_palette.css), so every pane follows along.
+ * It follows the desktop: bierstadt-dark reads as dark and Bierstadt reads as light,
+ * so `bierstadt-mode` switches Thunderbird too.
  *
  * Selection already uses the GTK accent (ink, or the inverted grey in the
  * dark room). The blues fold into ink, as they do in the GTK theme.
@@ -181,12 +181,12 @@
     --barHlColor: var(--layout-color-2) !important;
     --barColor: var(--color-primary-soft) !important;
     --dateHLColor: var(--layout-color-2) !important;
-    --gallery-rule: light-dark(var(--color-gray-30), var(--color-gray-60));
-    --gallery-hover: var(--color-primary-soft);
+    --bierstadt-rule: light-dark(var(--color-gray-30), var(--color-gray-60));
+    --bierstadt-hover: var(--color-primary-soft);
     /* The inbox's card view: cards on the page colour, set in a darker well. */
-    --gallery-well: light-dark(var(--color-gray-05), var(--color-black));
-    --gallery-card: var(--layout-background-0);
-    --gallery-card-hover: light-dark(
+    --bierstadt-well: light-dark(var(--color-gray-05), var(--color-black));
+    --bierstadt-card: var(--layout-background-0);
+    --bierstadt-card-hover: light-dark(
       color-mix(in srgb, var(--selected-item-color) 5%, var(--layout-background-0)),
       color-mix(in srgb, var(--selected-item-color) 10%, var(--layout-background-0))
     );
@@ -198,7 +198,7 @@
   }
   #gloda-facet-view,
   #main-column {
-    background-color: var(--gallery-well) !important;
+    background-color: var(--bierstadt-well) !important;
   }
   #main-column {
     padding-inline: 2.5em 1em !important;
@@ -244,7 +244,7 @@
   .bar:is(:hover, :focus, [selected="true"]) > :is(.bar-link, .bar-count),
   facet-boolean:not([disabled]):is(:hover, [checked="true"]) > .facet-checkbox-bubble,
   facet-boolean-filtered:not([disabled]):is(:hover, [checked="true"]) > .facet-checkbox-bubble {
-    background-color: var(--gallery-hover) !important;
+    background-color: var(--bierstadt-hover) !important;
     color: var(--layout-color-0) !important;
   }
   .bar-count,
@@ -262,11 +262,11 @@
     padding-inline-start: 10px !important;
   }
   .results-message-showall-button:is(:hover, :focus) {
-    background-color: var(--gallery-hover) !important;
+    background-color: var(--bierstadt-hover) !important;
     color: var(--layout-color-0) !important;
   }
   .results-message-header {
-    border-bottom: 1px solid var(--gallery-rule) !important;
+    border-bottom: 1px solid var(--bierstadt-rule) !important;
   }
   .gloda-timeline-button,
   #sortby {
@@ -282,15 +282,15 @@
     margin-block: 0 4px !important;
     border: none !important;
     border-radius: 10px !important;
-    background-color: var(--gallery-card) !important;
+    background-color: var(--bierstadt-card) !important;
     box-shadow: none !important;
   }
   .message:hover {
-    background-color: var(--gallery-card-hover) !important;
+    background-color: var(--bierstadt-card-hover) !important;
   }
   .message:focus {
     padding: 12px 14px !important;
-    outline: 1px solid var(--gallery-rule) !important;
+    outline: 1px solid var(--bierstadt-rule) !important;
   }
   .message:hover .message-subject {
     color: var(--layout-color-0) !important;

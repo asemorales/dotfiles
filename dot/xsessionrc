@@ -13,10 +13,10 @@ esac
 # lightdm-gtk-greeter.conf) and leaves its picture in the root pixmap
 # properties. Back at 3840x2160, xfwm4's compositor tiles that picture 2x2
 # until xfdesktop draws. Replace it with the room's page colour.
-case $(cat "$HOME/.local/state/gallery/mode" 2>/dev/null) in
-  light) gallery_page='#F2ECDF' ;;
-  *)     gallery_page='#191612' ;;
+case $(cat "$HOME/.local/state/bierstadt/mode" 2>/dev/null) in
+  light) bierstadt_page='#F2ECDF' ;;
+  *)     bierstadt_page='#191612' ;;
 esac
-"$HOME/.local/bin/gallery-root" "$gallery_page" 2>/dev/null \
-  || xsetroot -solid "$gallery_page" 2>/dev/null || true
-unset gallery_page
+"$HOME/.local/bin/bierstadt-root" "$bierstadt_page" 2>/dev/null \
+  || xsetroot -solid "$bierstadt_page" 2>/dev/null || true
+unset bierstadt_page

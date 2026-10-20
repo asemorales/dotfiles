@@ -1,7 +1,7 @@
-/* Gallery for Firefox's new tab page: the room's first painting, hung edge
+/* Bierstadt for Firefox's new tab page: the room's first painting, hung edge
  * to edge, with the search box resting on it like a museum label.
  *
- * This is a template. gallery-mode fills in the painting and label and
+ * This is a template. bierstadt-mode fills in the painting and label and
  * writes the result to <profile>/chrome/userContent.css, because the new tab
  * page cannot read a file next to a symlinked sheet. The painting goes in as
  * a data: URL, which the page's security policy allows.

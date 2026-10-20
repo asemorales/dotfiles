@@ -1,12 +1,12 @@
 # The parts both rooms share. Colours live in the two flavors, and Yazi picks
-# one on start from the terminal's background, so it follows gallery-mode
+# one on start from the terminal's background, so it follows bierstadt-mode
 # through Kitty. An open Yazi keeps its room until you restart it.
 
 #:schema https://yazi-rs.github.io/schemas/theme.json
 
 [flavor]
-dark  = "gallery-navy"
-light = "gallery-light"
+dark  = "bierstadt-dark"
+light = "bierstadt-light"
 
 [tabs]
 sep_inner = { open = " ", close = " " }

@@ -63,7 +63,7 @@ link_thunderbird_path() {
   do_link "$REPO/thunderbird/$1" "$HOME/.thunderbird/$profile/$1"
 }
 
-# chrome/userContent.css is not linked: gallery-mode writes it from the repo
+# chrome/userContent.css is not linked: bierstadt-mode writes it from the repo
 # copy with the room's painting in it.
 link_firefox_path() {
   local profile
@@ -82,23 +82,23 @@ link_dot_path dmrc
 link_dot_path xsessionrc
 link_dot_path ssh/config
 
-link_config_path autostart/gallery-bar.desktop
-link_config_path autostart/gallery-caption.desktop
+link_config_path autostart/bierstadt-bar.desktop
+link_config_path autostart/bierstadt-caption.desktop
 link_config_path autostart/kitty.desktop
 link_config_path fish/conf.d/uv.env.fish
-link_config_path gallery/wall.yml
+link_config_path bierstadt/wall.yml
 link_config_path btop/themes
 link_config_path eww
 link_config_path git/ignore
 link_config_path gtk-3.0/bookmarks
 link_config_path gtk-3.0/gtk.css
 link_config_path kitty/kitty.conf
-link_config_path kitty/gallery-navy.conf
-link_config_path kitty/gallery-light.conf
+link_config_path kitty/bierstadt-dark.conf
+link_config_path kitty/bierstadt-light.conf
 link_config_path mimeapps.list
 link_config_path neofetch/config.conf
 link_config_path nvim/init.lua
-link_config_path nvim/colors/gallery.lua
+link_config_path nvim/colors/bierstadt.lua
 link_config_path systemd/user/appimaged.service
 link_config_path user-dirs.dirs
 link_config_path VSCodium/User/keybindings.json
@@ -109,20 +109,20 @@ link_config_path xfce4/terminal/terminalrc
 link_config_path yazi/yazi.toml
 link_config_path yazi/keymap.toml
 link_config_path yazi/theme.toml
-link_config_path yazi/flavors/gallery-navy.yazi
-link_config_path yazi/flavors/gallery-light.yazi
+link_config_path yazi/flavors/bierstadt-dark.yazi
+link_config_path yazi/flavors/bierstadt-light.yazi
 
-link_theme_path Gallery
-link_theme_path Gallery-Navy
+link_theme_path bierstadt
+link_theme_path bierstadt-dark
 
-link_local_path bin/gallery-mode
-link_local_path bin/gallery-caption
-link_local_path bin/gallery-bar
-link_local_path bin/gallery-greeter
-link_local_path bin/gallery-grub
-link_local_path bin/gallery-plymouth
-link_local_path bin/gallery-root
-link_local_path share/icons/gallery-icons-build.py
+link_local_path bin/bierstadt-mode
+link_local_path bin/bierstadt-caption
+link_local_path bin/bierstadt-bar
+link_local_path bin/bierstadt-greeter
+link_local_path bin/bierstadt-grub
+link_local_path bin/bierstadt-plymouth
+link_local_path bin/bierstadt-root
+link_local_path share/icons/bierstadt-icons-build.py
 link_local_path share/applications/yazi.desktop
 link_local_path share/xfce4/helpers/yazi.desktop
 

@@ -1,0 +1,109 @@
+# Which paintings hang in each room, and how to fit them to the screen.
+# Read by ~/.local/bin/bierstadt-mode. Run `bierstadt-mode data` after editing.
+
+# One painting per workspace, in order. Keys come from the website's
+# _data/paintings.yml or from `extra` below.
+rooms:
+  light: [monet, monsted, polenov, kuindzhi]
+  dark: [bierstadt, bierstadt_landers, bierstadt_valley, bierstadt_rocky]   # all Bierstadt
+
+# The painting behind the boot menu (bierstadt-grub) and the login screen
+# (bierstadt-greeter) in both rooms. Leave it out to use each room's first painting.
+login: bierstadt_lucerne
+
+# Paintings are cropped to fill the screen. This is the share of the cut taken
+# from the top (1 = all sky, 0 = all foreground). Crop sky or land, never figures.
+crop_top:
+  monet: 0.35          # the two women stand mid-frame on the cliff
+  monsted: 0.5
+  polenov: 0.85        # children and the path sit at the bottom
+  kuindzhi: 0.5
+  bierstadt: 0.7       # deer at the water's edge
+  church: 0.5
+  aivazovsky: 0.85     # survivors on the mast, bottom left
+  bierstadt_landers: 0.8    # the encampment fills the foreground
+  bierstadt_valley: 0.75    # cattle by the river
+  bierstadt_storm: 0.5
+  bierstadt_rocky: 0.65     # the deer by the water, bottom centre
+  bierstadt_staubbach: 0.5  # the peaks and the falls, the valley floor below
+  bierstadt_lucerne: 0.4    # the campfire and the cattle on the path, bottom left
+  kuindzhi_moon: 0.45  # keep the moon clear of the panel and the river in view
+
+# Caption lines that replace the website's `life` sentence. An empty string
+# shows the label alone.
+life:
+  bierstadt: ""
+  # light room: the label alone
+  monet: ""
+  monsted: ""
+  polenov: ""
+  kuindzhi: ""
+
+# Paintings that are not on the website, in the same shape as paintings.yml.
+# `life` is optional.
+extra:
+  church:
+    artist: Frederic Edwin Church
+    title: Twilight in the Wilderness
+    year: "1860"
+    collection: Cleveland Museum of Art
+    source: https://commons.wikimedia.org/wiki/File:Frederic_Edwin_Church_-_Twilight_in_the_Wilderness.jpg
+    image: church-twilight
+    life: In his last decades rheumatism stiffened his painting hand, and he poured himself into his house, Olana.
+  aivazovsky:
+    artist: Ivan Aivazovsky
+    title: The Ninth Wave
+    year: "1850"
+    collection: State Russian Museum, Saint Petersburg
+    source: https://commons.wikimedia.org/wiki/File:Hovhannes_Aivazovsky_-_The_Ninth_Wave_-_Google_Art_Project.jpg
+    image: aivazovsky-ninth-wave
+    life: He painted thousands of seascapes, almost all of them from memory rather than from life.
+  kuindzhi_moon:
+    artist: Arkhip Kuindzhi
+    title: Moonlit Night on the Dnieper
+    year: "1880"
+    collection: State Russian Museum, Saint Petersburg
+    source: https://commons.wikimedia.org/wiki/File:Arkhip_Kuindzhi_-_%D0%9D%D0%BE%D1%87%D1%8C_%D0%BD%D0%B0_%D0%94%D0%BD%D0%B5%D0%BF%D1%80%D0%B5_-_Google_Art_Project.jpg
+    image: kuindzhi-moonlit-dnieper
+    life: He showed this painting alone in a darkened room, and people queued for hours to see it.
+  bierstadt_landers:
+    artist: Albert Bierstadt
+    title: The Rocky Mountains, Lander's Peak
+    year: "1863"
+    collection: The Metropolitan Museum of Art, New York
+    source: https://commons.wikimedia.org/wiki/File:Albert_Bierstadt_-_The_Rocky_Mountains,_Lander%27s_Peak.jpg
+    image: bierstadt-landers-peak
+  bierstadt_valley:
+    artist: Albert Bierstadt
+    title: Valley of the Yosemite
+    year: "1864"
+    collection: Museum of Fine Arts, Boston
+    source: https://commons.wikimedia.org/wiki/File:Albert_Bierstadt_-_Valley_of_the_Yosemite_-_Google_Art_Project.jpg
+    image: bierstadt-valley-of-yosemite
+  bierstadt_storm:
+    artist: Albert Bierstadt
+    title: A Storm in the Rocky Mountains, Mt. Rosalie
+    year: "1866"
+    collection: Brooklyn Museum, New York
+    source: https://commons.wikimedia.org/wiki/File:Albert_Bierstadt_-_A_Storm_in_the_Rocky_Mountains,_Mt._Rosalie_-_Google_Art_Project.jpg
+    image: bierstadt-storm-rosalie
+  bierstadt_staubbach:
+    artist: Albert Bierstadt
+    title: Staubbach Falls, Near Lauterbrunnen, Switzerland
+    year: "c. 1865"
+    source: https://commons.wikimedia.org/wiki/File:Bierstadt_Albert_Staubbach_Falls_Near_Lauterbrunnen_Switzerland.jpg
+    image: bierstadt-staubbach-falls
+  bierstadt_lucerne:
+    artist: Albert Bierstadt
+    title: Lake Lucerne
+    year: "1858"
+    collection: National Gallery of Art, Washington
+    source: https://commons.wikimedia.org/wiki/File:Albert_Bierstadt_-_Lake_Lucerne_-_Google_Art_Project.jpg
+    image: bierstadt-lake-lucerne
+  bierstadt_rocky:
+    artist: Albert Bierstadt
+    title: Rocky Mountain Landscape
+    year: "1870"
+    collection: The White House, Washington
+    source: https://commons.wikimedia.org/wiki/File:Albert_Bierstadt_-_Rocky_Mountain_Landscape_-_Google_Art_Project.jpg
+    image: bierstadt-rocky-mountain-landscape
