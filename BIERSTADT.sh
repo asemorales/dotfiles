@@ -101,6 +101,8 @@ set_prop xfwm4 /general/shadow_delta_y int 6
 set_prop xfwm4 /general/shadow_delta_width int 0
 set_prop xfwm4 /general/shadow_delta_height int 4
 set_prop xfwm4 /general/workspace_count int 4
+# Keep the pointer from flipping workspaces when it reaches a screen edge
+set_prop xfwm4 /general/wrap_workspaces bool false
 xfconf-query -c xfwm4 -p /general/workspace_names -r 2>/dev/null || true
 xfconf-query -c xfwm4 -p /general/workspace_names -n -t string -s I -t string -s II -t string -s III -t string -s IV
 
