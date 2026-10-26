@@ -1,15 +1,15 @@
 # Style Guide Reference
 
 This file holds the full source material for the `rewrite-paper` skill. It is
-self-contained: the original PDFs and web pages are not needed. Three layers,
-in priority order when they conflict:
+self-contained: the original PDFs and web pages are not needed. Three layers:
 
 1. **User conventions** (hard constraints, override everything below)
 2. **Littman, "Stylistic Comments"** (verbatim)
 3. **Sutton, "Advice on Technical Writing"** (verbatim)
 
-Where Littman and Sutton disagree with a user convention, the user convention
-wins (see the conflict notes at the end).
+Littman and Sutton carry equal weight. Neither overrides the other. Where
+either disagrees with a user convention, the user convention wins (see the
+conflict notes at the end).
 
 ---
 
@@ -54,7 +54,6 @@ be swept for on every pass.
 - **Never bold model/method/system names** in prose or tables. Write DraxNet,
   FlipR, ResNet-18, YOLO26, not `\textbf{...}`. Bold is reserved for the best
   value in a results table.
-- **`et al.`** in IEEE-style citations may stay despite the avoid-Latin rule.
 - **Results-section topic sentences** may be bolded (a deliberate exception to
   the bold-only-table-best rule), but ONLY when the user explicitly asks to
   restructure the Results section. Do not apply unprompted.
@@ -175,8 +174,6 @@ inline, make up / makeup.
 - Don't use citations as nouns. Say "As explained by Kearns and Singh (2002)" or
   "As explained in the literature (Kearns and Singh 2002)", not "As explained by
   (Kearns and Singh, 2002)".
-- Don't use Latin abbreviations. Say "that is" instead of "i.e." and "for
-  example" instead of "e.g.". Spelled-out Latin like "ad hoc" is fine.
 - Avoid empty sections. Put some text between a section title and its first
   subsection.
 - Capitalize names of structural items: "Section 3.1", "Item 2", "Table 3",
@@ -249,8 +246,7 @@ These let the reader rest and free their short-term memory. Separate:
 - Use commas (or parentheses) around parentheticals.
 - Among near synonyms, choose the most specific word. Don't use "since" for
   "because", or "continuous" for "continual".
-- Use "i.e." and "e.g." only in parentheses, always followed by a comma. NOTE:
-  the user prefers spelled-out English (Littman); see conflict notes.
+- Use "i.e." and "e.g." only in parentheses, always followed by a comma.
 - Use the Oxford comma (a, b, and c).
 - Never use a citation as part of a sentence.
 - Use citations thoughtfully. What is their meaning? Is it clear?
@@ -290,9 +286,6 @@ These let the reader rest and free their short-term memory. Separate:
 
 - **Em-dashes:** user "no em-dash" beats Littman's em-dash usage. Never emit
   `---` or `—`.
-- **Latin abbreviations:** Littman ("for example" / "that is") beats Sutton
-  ("i.e." / "e.g." in parentheses). Spell them out in English. Exception:
-  `et al.` in IEEE-style citations may stay.
 - **Semicolons:** user "no semicolons" applies even though both sources use them
   freely in their own prose.
 - **Citation format:** Sutton prefers name-year (apalike). Match the target

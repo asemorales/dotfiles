@@ -22,8 +22,8 @@ skill is self-contained: everything needed is in these two files.
 ## Procedure
 
 1. **Read `style-guide.md`** in this skill directory. It is the source of truth,
-   organized in three priority layers (user conventions > Littman > Sutton) with
-   conflict-resolution notes. Do not work from memory alone.
+   organized in three layers (user conventions over Littman and Sutton, which
+   carry equal weight) with conflict-resolution notes. Do not work from memory alone.
 
 2. **Identify the target.** A file (read it first) or a pasted passage. For a
    file, note the format: LaTeX, Markdown, or plain prose. Confirm scope if
@@ -64,8 +64,8 @@ skill is self-contained: everything needed is in these two files.
    - *Usage:* that/which, comma rules, hyphenated compound modifiers
      ("reinforcement-learning algorithm"), capitalized structural references
      (Section 3, Table 2), confusable pairs, citations integrated into sentences
-     (never a bare parenthetical as a noun), spelled-out Latin ("for example",
-     "that is").
+     (never a bare parenthetical as a noun), "i.e." and "e.g." only in
+     parentheses and followed by a comma.
 
 5. **Run the hard-constraint sweep** (user conventions, never skip):
    - No `---` and no literal `—`. Replace with `, ` / parentheses / colon. Never
@@ -98,10 +98,9 @@ skill is self-contained: everything needed is in these two files.
 
 ## Notes
 
-- When two rules conflict, follow the priority in `style-guide.md`: user
-  conventions beat Littman, Littman beats Sutton. Key cases: em-dashes forbidden
-  (overrides Littman), Latin abbreviations spelled out (Littman over Sutton),
-  `et al.` allowed in IEEE citations.
+- When a rule conflicts with a user convention, the user convention wins (see
+  the conflict notes in `style-guide.md`). Littman and Sutton carry equal
+  weight. Key case: em-dashes forbidden (overrides Littman).
 - Match the document's existing citation style rather than forcing apalike.
 - Apply these rules by default whenever you write prose for the user, even
   without an explicit request.

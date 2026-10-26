@@ -134,6 +134,5 @@ link_firefox_path user.js
 link_firefox_path chrome/userChrome.css
 
 link_claude_path settings.json
-link_claude_path skills/rewrite-natural
 link_claude_path skills/rewrite-paper
 link_claude_path skills/suggest-paper-figs
