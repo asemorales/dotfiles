@@ -1,18 +1,10 @@
-# Sourced by Debian's Xsession before Xfce starts.
-
-# Xsession does not read ~/.profile, so put ~/.local/bin on the session's PATH
-# here. Menus and shortcuts then find the newer Kitty (~/.local/kitty.app,
-# linked into ~/.local/bin) before Debian's 0.26, which Yazi's image previews
-# need.
+# Xsession does not read ~/.profile.
 case ":$PATH:" in
   *":$HOME/.local/bin:"*) ;;
   *) PATH="$HOME/.local/bin:$PATH"; export PATH ;;
 esac
 
-# The login screen runs at 1920x1080 (the xrandr "reader" line in
-# lightdm-gtk-greeter.conf) and leaves its picture in the root pixmap
-# properties. Back at 3840x2160, xfwm4's compositor tiles that picture 2x2
-# until xfdesktop draws. Replace it with the room's page colour.
+# xfwm4's compositor tiles the 1920x1080 greeter's root pixmap 2x2 until xfdesktop draws.
 case $(cat "$HOME/.local/state/bierstadt/mode" 2>/dev/null) in
   light) bierstadt_page='#F2ECDF' ;;
   *)     bierstadt_page='#191612' ;;

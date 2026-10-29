@@ -56,15 +56,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-# Bierstadt prompt: a blank line, user@host in quiet grey, the folder like a
-# caption with the git branch in grey, then a single mark to write after.
-#
-#   ase@metsequoia  ~/code/dotfiles · main*
-#   ›
-#
-# It uses the terminal's own colours (default text, 8 grey, 1 red), so it
-# follows the room whenever bierstadt-mode recolours Kitty or Xfce Terminal.
-# The mark turns red after a failed command.
+# Terminal palette colours only, so bierstadt-mode recolours the prompt with the terminal.
 __bierstadt_branch() {
     local b
     b=$(git symbolic-ref --short -q HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null) || return
@@ -87,7 +79,6 @@ PS2='  '
 __bierstadt_colour=$color_prompt
 unset color_prompt force_color_prompt
 
-# Window title: the folder, so Kitty tabs read like captions too.
 case "$TERM" in
 xterm*|rxvt*)
     PROMPT_COMMAND="$PROMPT_COMMAND;"'printf "\e]0;%s\a" "${PWD/#$HOME/\~}"'
@@ -169,7 +160,7 @@ command -v zoxide >/dev/null && eval "$(zoxide init bash)"
 
 # fzf: Ctrl-R history, Ctrl-T files, Alt-C folders. Quiet like the prompt:
 # default text, grey for everything around it, underlined matches. Terminal
-# colours only, so it follows the room too.
+# colours only, so bierstadt-mode recolours it too.
 if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
     . /usr/share/doc/fzf/examples/key-bindings.bash
     export FZF_DEFAULT_OPTS="--layout=reverse --height=40% --border=rounded --margin=0,1 \

@@ -4,23 +4,23 @@
 >
 > David Hume, *A Treatise of Human Nature* (1739)
 
-## Setup
+## Components
 
 - [Debian 12](https://www.debian.org) as Linux distribution
 - [Xfce](https://www.xfce.org) as desktop environment
   - `bierstadt` and `bierstadt-dark` as window, GTK and notification themes
-  - Icons: Recoloured from Suru++ Asprómauros
-  - Cursor: [Bibata Modern](https://github.com/ful1e5/Bibata_Cursor) recoloured by `themes/cursors/build.py`, cream in the dark room and ink in the light room
-  - App light/dark preference: dark in the dark room and light in the light room, so browsers and Electron apps set to follow the device match the room
-  - Fonts: Inter, DM Mono and Newsreader as fonts
-  - Wallpapers: Public-domain landscape paintings
-  - Panel: [eww](https://github.com/elkowar/eww)
-  - Resource monitor: [btop](https://github.com/aristocratos/btop)
-- [Bash](https://www.gnu.org/software/bash/) as shell, with a quiet two-line prompt and themed [fzf](https://github.com/junegunn/fzf)
+  - Icons recoloured from Suru++ Asprómauros
+  - [Bibata Modern](https://github.com/ful1e5/Bibata_Cursor) cursor, recoloured by `themes/cursors/build.py`: cream in the dark room, ink in the light room
+  - App colour preference set to dark in the dark room and light in the light room, so browsers and Electron apps set to use the system colour scheme match the room
+  - Inter, DM Mono and Newsreader as fonts
+  - Public-domain landscape paintings as wallpapers
+  - [eww](https://github.com/elkowar/eww) as panel
+  - [btop](https://github.com/aristocratos/btop) as resource monitor
+- [Bash](https://www.gnu.org/software/bash/) as shell, with a two-line prompt and themed [fzf](https://github.com/junegunn/fzf)
 - [Firefox](https://www.mozilla.org/firefox/) as browser, in Bierstadt colours with a painting on the new tab
 - [VSCodium](https://vscodium.com) as text editor
 - [Neovim](https://neovim.io) as terminal text editor
-- [Kitty](https://sw.kovidgoyal.net/kitty/) as terminal (the official build in `~/.local/kitty.app`, since Debian's 0.26 cannot show Yazi's image previews)
+- [Kitty](https://sw.kovidgoyal.net/kitty/) as terminal, using the official build in `~/.local/kitty.app` because Debian's 0.26 cannot show Yazi's image previews
 - [Yazi](https://yazi-rs.github.io) as file explorer
 
 ## Folders
@@ -42,23 +42,23 @@ git clone <this repo> ~/code/dotfiles
 ~/code/dotfiles/INSTALL.sh
 ```
 
-To fix warnings, compare the two files with `diff`. Keep the version you want in the repo, then delete the home copy and run the script again.
+`INSTALL.sh` warns when a real file sits where a link should go. Compare the two files with `diff`, keep the version you want in the repo, delete the home copy, and run the script again.
 
 ## Setup
 
-After `INSTALL.sh`, run `BIERSTADT.sh` inside an Xfce session. This fetches the fonts and paintings, builds the icon themes, and applies Xfce settings in xfconf (fonts, window shadows, workspaces, the top panel).
+After `INSTALL.sh`, run `BIERSTADT.sh` inside an Xfce session. It fetches the fonts and paintings, builds the icon and cursor themes, and applies the Xfce settings for fonts, window shadows, workspaces, and the top panel.
 
-Switch themes via terminal with `bierstadt-mode dark`, `bierstadt-mode light` or `bierstadt-mode toggle`. Dark is the default.
+Switch rooms with `bierstadt-mode dark`, `bierstadt-mode light` or `bierstadt-mode toggle`. Dark is the default.
 
-To dress the login screen in the current room, run `bierstadt-greeter`. It asks for sudo, because the login screen can only read system folders. Run it again after switching rooms.
+Run `bierstadt-greeter` to theme the login screen in the current room. It asks for sudo because the login screen can only read system folders. Run it again after switching rooms.
 
-To dress the boot menu to match, run `bierstadt-grub`. It builds a GRUB theme from the same painting and palette, installs it to `/boot/grub/themes/bierstadt` and runs `update-grub`, so it also asks for sudo. The first `/etc/default/grub` is kept as `/etc/default/grub.pre-bierstadt`.
+Run `bierstadt-grub` to theme the boot menu. It builds a GRUB theme from the same painting and palette, installs it to `/boot/grub/themes/bierstadt`, and runs `update-grub`, so it also asks for sudo. It saves the original `/etc/default/grub` as `/etc/default/grub.pre-bierstadt`.
 
-To dress the boot splash between the two, run `bierstadt-plymouth`. It shows the same painting, fading in, with a hairline for progress and no caption. It installs a Plymouth theme, adds `splash` to the kernel command line and rebuilds the initramfs, so it asks for sudo too.
+Run `bierstadt-plymouth` to theme the boot splash that appears between the two. The splash fades in the same painting and shows progress as a hairline, with no caption. The script installs a Plymouth theme, adds `splash` to the kernel command line, and rebuilds the initramfs, so it asks for sudo too.
 
-Firefox's new tab shows a different painting from the room each time `bierstadt-mode` runs. Firefox picks it up on its next start.
+Every time you run `bierstadt-mode`, it puts a different painting from the room on Firefox's new tab. Firefox shows it after its next restart.
 
-To get Kitty's official build, run `curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n`, then link `~/.local/kitty.app/bin/kitty` and `kitten` into `~/.local/bin`. `dot/xsessionrc` puts `~/.local/bin` on the desktop's PATH so menus find it.
+To install Kitty's official build, run `curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n`, then link `~/.local/kitty.app/bin/kitty` and `kitten` into `~/.local/bin`. `dot/xsessionrc` puts `~/.local/bin` on the desktop's PATH so menus find Kitty.
 
 ## Add a new config
 
@@ -68,19 +68,18 @@ To get Kitty's official build, run `curl -L https://sw.kovidgoyal.net/kitty/inst
 
 ## Check the script
 
-[ShellCheck](https://www.shellcheck.net) is used to find common bugs in shell scripts.
+Use [ShellCheck](https://www.shellcheck.net) to find common bugs in the install script:
 
-To run:
 ```bash
 shellcheck INSTALL.sh
 ```
 
 ## Add local configs to untracked files
 
-- `~/.gitconfig.local` to add git name and email
-- `~/.ssh/config.local` to add private SSH hosts
+- `~/.gitconfig.local` for your git name and email
+- `~/.ssh/config.local` for private SSH hosts
 
-For example:
+For example, `~/.gitconfig.local`:
 
 ```ini
 [user]

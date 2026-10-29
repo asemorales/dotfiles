@@ -21,7 +21,7 @@ set -euo pipefail
 EWW_DIR="$HOME/.config/eww"
 STATE_DIR="$HOME/.local/state/bierstadt"
 TSV="$HOME/.local/share/bierstadt/paintings.tsv"
-export PATH="$HOME/.local/bin:$PATH"   # eww runs bierstadt-bar, bierstadt-mode and itself by name
+export PATH="$HOME/.local/bin:$PATH"
 
 usage() { sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'; }
 
@@ -34,7 +34,6 @@ room() {
 
 root_prop() { xprop -root "$1" | awk '{ print $NF }'; }
 
-# The painting that hangs on workspace N, for the plate's tooltip.
 painting() {
   local set key
   mapfile -t set < "$STATE_DIR/set" 2>/dev/null || return 0
@@ -60,7 +59,6 @@ workspaces() {
   done
 }
 
-# {"pct":40,"muted":false}, for the slider and its label.
 volume_now() {
   local pct muted=false
   pct=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -1 | tr -d %)
@@ -79,14 +77,9 @@ network() {
                END { if (!found) print "offline" }'
 }
 
-# nmtui's network list: everything in range, saved or not, with a password
-# prompt for new ones. nm-connection-editor only lists saved connections, so it
-# stays on right-click. A second click closes the window.
 wifi() {
   if pkill -f "^kitty --class bierstadt-wifi" 2>/dev/null; then return 0; fi
   nmcli dev wifi rescan >/dev/null 2>&1 || true
-  # newt (nmtui's toolkit) takes hex colours when COLORTERM=truecolor, so it is
-  # dressed in the current room's eww palette instead of its blue and red.
   local scss page panel rule frame mid dim text
   scss="$EWW_DIR/_$(bierstadt-mode status 2>/dev/null || echo dark).scss"
   pal() { sed -n "s/^\$$1: *\(#[0-9A-Fa-f]\{6\}\);.*/\1/p" "$scss"; }
@@ -105,9 +98,6 @@ wifi() {
      nmtui connect >/dev/null 2>&1 &)
 }
 
-# btop, the "instruments" behind cpu and mem, in the room's colours. btop
-# rewrites its config on exit, so the config stays local and only the themes
-# (config/btop/themes) live in the repo. A second click closes the window.
 instruments() {
   local conf="$HOME/.config/btop/btop.conf" mode
   if pkill -f "^kitty --class bierstadt-instruments" 2>/dev/null; then return 0; fi
@@ -128,8 +118,7 @@ instruments() {
 start() {
   command -v eww >/dev/null || { echo "bierstadt-bar: eww is not installed" >&2; exit 1; }
   room
-  # --quit stops the session restarting it. Only send it to a running panel:
-  # with none running, xfce4-panel pops up a "No running instance" dialog.
+  # Without a running panel, xfce4-panel --quit shows a "No running instance" dialog.
   if pgrep -x xfce4-panel >/dev/null; then xfce4-panel --quit 2>/dev/null || true; fi
   eww daemon 2>/dev/null || true
   eww open bar

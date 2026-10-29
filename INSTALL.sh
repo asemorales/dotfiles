@@ -49,8 +49,6 @@ link_local_path() {
   do_link "$REPO/local/$1" "$HOME/.local/$1"
 }
 
-# The profile Thunderbird or Firefox opens, from the [Install...] section in
-# profiles.ini. Usage: mozilla_profile ~/.thunderbird
 mozilla_profile() {
   awk -F= '/^\[Install/ { s = 1; next } /^\[/ { s = 0 } s && $1 == "Default" { print $2; exit }' \
     "$1/profiles.ini" 2>/dev/null || true
@@ -59,16 +57,15 @@ mozilla_profile() {
 link_thunderbird_path() {
   local profile
   profile="$(mozilla_profile "$HOME/.thunderbird")"
-  [ -n "$profile" ] || return 0   # Thunderbird has not run yet
+  [ -n "$profile" ] || return 0
   do_link "$REPO/thunderbird/$1" "$HOME/.thunderbird/$profile/$1"
 }
 
-# chrome/userContent.css is not linked: bierstadt-mode writes it from the repo
-# copy with the room's painting in it.
+# bierstadt-mode writes chrome/userContent.css.
 link_firefox_path() {
   local profile
   profile="$(mozilla_profile "$HOME/.mozilla/firefox")"
-  [ -n "$profile" ] || return 0   # Firefox has not run yet
+  [ -n "$profile" ] || return 0
   do_link "$REPO/firefox/$1" "$HOME/.mozilla/firefox/$profile/$1"
 }
 

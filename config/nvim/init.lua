@@ -1,5 +1,3 @@
--- Neovim settings. Colours: colors/bierstadt.lua
-
 local opt = vim.opt
 
 opt.number = true
@@ -22,10 +20,8 @@ opt.fillchars = { eob = " ", vert = "│" }
 opt.laststatus = 3
 opt.showmode = false
 
--- Quiet status line: file name on the left, position on the right.
 opt.statusline = "  %f %m%r%=%{&filetype}   %l:%c  "
 
--- Match the room bierstadt-mode last chose (dark or light).
 local function bierstadt_room()
   local f = io.open(vim.fn.expand("~/.local/state/bierstadt/mode"))
   local mode = f and f:read("*l") or "dark"
@@ -44,7 +40,6 @@ end
 opt.termguicolors = true
 apply_room()
 
--- Pick up a `bierstadt-mode toggle` when you come back to the window.
 vim.api.nvim_create_autocmd("FocusGained", { callback = apply_room })
 
 vim.g.mapleader = " "
